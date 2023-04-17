@@ -8,6 +8,16 @@ body {
     background: #fafafa;
 }
 
+.bg-image {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
 p {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.1em;

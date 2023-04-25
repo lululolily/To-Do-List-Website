@@ -2,6 +2,7 @@
 
 This system is a web-based application that allows users to manage their daily tasks and schedule.
 The system should provide the following functions:
+
 ● Register a new user account, user login to access the system, manage the sessions.
 ● Manage user profile (view, update user details, delete a user account).
 ● Manage tasks to be able to view, add, edit and delete tasks.

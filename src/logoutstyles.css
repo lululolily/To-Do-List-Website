@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
 @import "https://fonts.googleapis.com/css?family=Josefin Sans:300,400,500,600,700";
-
+/*push*/
 *{
     font-family: 'Josefin Sans', sans-serif;
 
@@ -23,34 +23,24 @@
     box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 }
 .side-image{
+    background-image: url("assets/bglogout1.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
     border-radius: 10px 0 0 10px;
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
-    float: left;
 }
 
-img{
-    width: 35px;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-}
 .text{
     position: absolute;
-    top: 80%;
-    left: 42%;
+    top: 83%;
+    left: 53%;
     transform: translate(-50%, -50%);
-    text-align: right;
+}
+.text p{
     color: #fff;
     font-size: 18px;
 }
-
 i{
     font-weight: 400;
     font-size: 20px;
@@ -62,7 +52,7 @@ i{
     position: relative;
 }
 .input-box{
-    width: 330px;
+    width: 290px;
     border-radius: 25px;
     box-sizing: border-box;
 }
@@ -77,36 +67,6 @@ i{
     position: relative;
     padding: 0 20px 0 20px;
 }
-.input{
-    height: 40px;
-    width: 100%;
-    background: rgba(113, 174, 120, 0.12);
-    border: none;
-    /* border-bottom: 1px solid rgba(0,0,0,0.2); */
-    outline: none;
-    border-radius: 25px;
-    margin-bottom: 20px;
-    color: #40414a;
-}
-.input-box .input-field label{
-    position: absolute;
-    top: 10px;
-    left: 35px;
-    pointer-events: none;
-    transition: .5s;
-}
-.input-field .input:focus ~ label{
-    top: -10px;
-    font-size: 13px;
-}
-.input-field .input:valid ~ label{
-    top: -10px;
-    font-size: 13px;
-    color: #5d5076;
-}
-.input-field .input:focus, .input-field .input:valid{
-    border-bottom: 1px solid #743ae1;
-}
 
 .submit{
     border: none;
@@ -116,7 +76,7 @@ i{
     text-align: center;
     height: 35px;
     width: 245px;
-    background: #D66161;
+    background: #d66161;
     border-radius: 25px;
     transition: .4s;
     box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
@@ -127,57 +87,11 @@ i{
     color: #fff;
 }
 
-.google{
-    border: none;
-    outline: none;
-    margin-bottom: 20px;
-    height: 35px;
-    background: #FFB800;
-    border-radius: 25px;
-    transition: .4s;
-    
-}
-.google:hover{
-    background: #0094FF;
-    color: #fff;
-}
-
-.facebook{
-    border: none;
-    outline: none;
-    height: 35px;
-    background: #FFB800;
-    border-radius: 25px;
-    transition: 0.4s;
-    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
-}
-.facebook:hover{
-    background:#0094FF;
-    color: #fff;
-}
-.signup{
+.tq{
     text-align: center;
     font-size: smaller;
-    margin-bottom: 30px;
-    margin-top: 10px;
 }
 
-.Forgot{
-    text-align: right;
-    font-size: smaller;
-    margin-bottom: 20px;
-    color: #0094FF;
-}
-span a{
-    text-decoration: none;
-    font-weight: 700;
-    color: #0094FF;
-    transition: .5s;
-}
-span a:hover{
-    text-decoration: underline;
-    color: #0094FF;
-}
 @media only screen and (max-width: 768px){
     .side-image{
         border-radius: 10px 10px 0 0;

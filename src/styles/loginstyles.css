@@ -23,12 +23,16 @@
     box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 }
 .side-image{
-    background-image: url("assets/background.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
     border-radius: 10px 0 0 10px;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    float: left;
 }
 
 img{
@@ -40,13 +44,13 @@ img{
 .text{
     position: absolute;
     top: 80%;
-    left: 50%;
+    left: 42%;
     transform: translate(-50%, -50%);
-}
-.text p{
+    text-align: right;
     color: #fff;
     font-size: 18px;
 }
+
 i{
     font-weight: 400;
     font-size: 20px;

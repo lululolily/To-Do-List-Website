@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
 @import "https://fonts.googleapis.com/css?family=Josefin Sans:300,400,500,600,700";
-
+/*push*/
 *{
     font-family: 'Josefin Sans', sans-serif;
 
@@ -23,7 +23,7 @@
     box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 }
 .side-image{
-    background-image: url("assets/bglogout.png");
+    background-image: url("assets/bglogout1.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

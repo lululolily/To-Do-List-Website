@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+@import "https://fonts.googleapis.com/css?family=Josefin Sans:300,400,500,600,700";
+/*push*/
+*{
+    font-family: 'Josefin Sans', sans-serif;
+
+}
+.wrapper{
+    background: #D2E9D7;
+    padding: 0 20px 0 20px;
+}
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.row{
+    width: 1000px;
+    height: 550px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+}
+.side-image{
+    background-image: url("assets/bglogout1.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 10px 0 0 10px;
+}
+
+.text{
+    position: absolute;
+    top: 83%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+}
+.text p{
+    color: #fff;
+    font-size: 18px;
+}
+i{
+    font-weight: 400;
+    font-size: 20px;
+}
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.input-box{
+    width: 290px;
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+.input-box header{
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 45px;
+}
+.input-field{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 20px 0 20px;
+}
+
+.submit{
+    border: none;
+    outline: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 35px;
+    width: 245px;
+    background: #d66161;
+    border-radius: 25px;
+    transition: .4s;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
+}
+.submit:hover{
+    background: #0094FF;
+    text-align: center;
+    color: #fff;
+}
+
+.tq{
+    text-align: center;
+    font-size: smaller;
+}
+
+@media only screen and (max-width: 768px){
+    .side-image{
+        border-radius: 10px 10px 0 0;
+    }
+    img{
+        width: 35px;
+        position: absolute;
+        top: 20px;
+        left: 47%;
+    }
+    .text{
+        position: absolute;
+        top: 70%;
+        text-align: center;
+    }
+    .text p,i{
+        font-size: 17px;
+    }
+    .row{
+        max-width: 420px;
+        width: 100%;
+    }
+}

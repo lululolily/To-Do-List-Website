@@ -94,6 +94,9 @@ a:focus {
     max-width: 250px;
     background: #f3f3f3;
     color: #000;
+    height: 100vh; 
+    position: sticky;
+    top: 0;
     transition: all 0.3s;
 }
 
@@ -136,6 +139,7 @@ a[aria-expanded="true"] {
 a[data-toggle="collapse"] {
     position: relative;
 }
+
 
 .dropdown-toggle{
     position: relative;
@@ -339,7 +343,7 @@ ul.CTAs a {
     color: #686868;
   }
 
-  .btn-box .fal{
+  .btn-box .fa-regular{
     margin-right: 20px;
   }
 
@@ -441,6 +445,10 @@ ul.CTAs a {
     top: 5px !important;
     margin-right: 5px;
   }
+
+  .select2-container--default .select2-results__option[aria-selected=true] .select2-icon i {
+    color: red; 
+  }
   
   label {
     color: #868686;
@@ -452,6 +460,73 @@ ul.CTAs a {
     padding: 15px;
     margin-bottom: 5px;
   }
+
+  .dropdown-menu{
+    width: 350px;
+  }
+
+  .notification-header{
+    padding: 5px 20px;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0px;
+  }
+
+  .notification-content{
+    margin: 7px;
+  }
+
+  .notification-list{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 5px 0;
+    margin: 0 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notify{
+    color: black !important;
+    margin-bottom: -2px;
+  }
+
+  .notification-footer{
+    display: flex;
+    justify-content: center;
+  }
+
+  .notification-footer .btn{
+    width: 325px;
+  }
+
+  .notification-list--priority {
+    position: relative;
+  }
+  
+  .notification-list--priority:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -22px;
+    height: calc(100% + 1px);
+    border-left: 5px solid #ff0000;
+  }
+
+  .notification-list--deadline {
+    position: relative;
+  }
+  
+  .notification-list--deadline:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -22px;
+    height: calc(100% + 1px);
+    border-left: 5px solid #f8ff22;
+  }
+  
  
 /* ---------------------------------------------------
     MEDIAQUERIES

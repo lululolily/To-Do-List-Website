@@ -94,13 +94,13 @@
                 <h1 style="display: inline-block;"><b>TO-DO Progress</b></h1>
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" href="#">Tasks Summary</a>
+                      <a class="nav-link" data-bs-toggle="tab" href="status.html"><i class="fa-regular fa-clipboard fa-xl"></i>Tasks Summary</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" href="#">By Status</a>
+                      <a class="nav-link" data-bs-toggle="tab" href="status.html">By Status</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" href="#">By Category</a>
+                      <a class="nav-link" data-bs-toggle="tab" href="category.html">By Category</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="progress.html">View Progress</a>
@@ -110,10 +110,7 @@
 
               <!--page content-->
               
-              <div class = "containers">
-                <div class = "row">
-
-                  <div class = "col-md-8">
+              <div class = "containerchart">
                     <div class = "text">Tasks completed on time for the past 7 days</div>
                     <div class="chartMenu">
                     </div>
@@ -197,15 +194,29 @@
                     const chartVersion = document.getElementById('chartVersion');
                     chartVersion.innerText = Chart.version;
                     </script>
+
+</div>
                 
+                  
+
+                  <div class = "containers">
+
+                  <div class = "row">
+
+                    <div class = "col-md-6">
+                    <div class="progress-circular-priority">
+                    <span class = "value">0/0</span>
+                    </div>
+                  <div class = "text">Tasks completed on time</div>
                   </div>
 
-                  <div class = "col-md-4">
+                  <div class = "col-md-6">
                     <div class="progress-circular-priority">
-                    <span class = "value">0</span>
+                    <span class = "value">0/0</span>
                     </div>
-                  <div class = "text">Priority tasks completed</div>
+                  <div class = "text">Tasks completed after deadline</div>
                   </div>
+                </div>
 
               </div>
               <script src = "script.js"></script>

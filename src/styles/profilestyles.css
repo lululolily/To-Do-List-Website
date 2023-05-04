@@ -195,7 +195,7 @@ ul.CTAs a {
     height: 35px;
     width: 125px;
     margin-top: 30px;
-    background: #D66161;
+    background: #CCB3A3;
     border-radius: 25px;
     transition: .4s;
     box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
@@ -208,15 +208,14 @@ ul.CTAs a {
 
 .submit2 {
     display: block;
-    position: fixed;
     margin-left: auto;
     margin-right: 0;
     border: none;
     outline: none;
     text-align: center;
     height: 35px;
-    width: 40%;
-    background: #D66161;
+    width: 160px;
+    background: #CCB3A3;
     border-radius: 25px;
     transition: .4s;
     box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
@@ -232,7 +231,7 @@ ul.CTAs a {
     outline: none;
     text-align: center;
     height: 35px;
-    width: 180px;
+    width: 160px;
     background: #D66161;
     border-radius: 25px;
     transition: .4s;
@@ -244,75 +243,122 @@ ul.CTAs a {
     color: #fff;
 }
 
-
-
-.btn{
-    padding-top: 12px;
+.submit4 {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    border: none;
+    outline: none;
+    text-align: center;
+    height: 35px;
+    width: 160px;
+    background: #000000;
+    color: #fff;
+    border-radius: 25px;
+    transition: .4s;
+    box-shadow: 3px 3px 3pxS 1px rgba(0,0,0,0.2);
+}
+.submit4:hover{
+    background: #0094FF;
+    text-align: center;
+    color: #fff;
 }
 
-.btn:hover{
-    color: rgba(255, 166, 0, 0.5);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-} 
+.submit5{
+    background: #CCB3A3;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    float: right;
+    margin-bottom: 10px;
+  }
 
+  .submit4:hover{
+    background: #0094FF;
+    text-align: center;
+    color: #fff;
+}
+
+
+
+.popup {
+    position: fixed;
+    left: 50%;
+    width: 400px;
+    border-radius: 10px;
+    padding: auto;
+    background-color: white;
+    display: block;
+    transition: visibility 0s, opacity 0.3s linear;
+
+  }
+
+  .open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
+  }
+
+  .dialog {
+    padding: 12px 20px;
+  }
+
+  .header {
+    padding-top: 14px;
+    padding-bottom: 2px;
+    padding-left: 20px;
+    background-color: orange;
+    color: white;
+    border-radius: 15px 15px 0 0;
+    border-bottom: 1px solid #000;
+  }
+  
+  input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: #D3D3D3;
+    border: 1px solid #000;
+  }
+
+  .label{
+    color: #000;
+  }
+  
+  .button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    float: right;
+    margin-bottom: 10px;
+  }
+
+  
+  label {
+    color: #868686;
+  }
+
+  .popup-header {
+    background-color: orange;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+  }
 
 .nav-link {
     color: #000;
     margin-top: 5px;
 }
 
-.task {
-    width: 500px;
-    height: 100px;
-    left: 90px;
-    top: 342px;
-    padding-top: 20px;
-    padding-left: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-}
-
-#flexCheckDefault:checked + .form-check-label {
-    text-decoration: line-through;
-  }
-
-.form-check-label{
-    font-size: larger;
-    color: #754646;
-    padding-top: 2.5px;
-    padding-left: 20px;
-    position: relative;
-}
-
-.form-check-label[type="checkbox"]:checked {
-    text-decoration: line-through;
-}
-
-.form-check-input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .form-check-input[type="checkbox"]:checked {
-    background-color: #A6FFAF;
-    border-color: #A6FFAF;
-  }
-  
-  .form-check-input[type="checkbox"]:focus {
-    box-shadow: 0 0 0 3px #4DB857;
-  }
   
   .badge{
     padding-top: 5px;
@@ -329,7 +375,6 @@ ul.CTAs a {
 h6{
     margin-top: 0;
 }
-  
 
 /* ---------------------------------------------------
     MEDIAQUERIES

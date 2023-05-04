@@ -110,11 +110,9 @@ i{
 .submit{
     border: none;
     outline: none;
-    justify-content: center;
-    align-items: center;
     text-align: center;
     height: 35px;
-    width: 245px;
+    width: 290px;
     background: #D66161;
     border-radius: 25px;
     transition: .4s;

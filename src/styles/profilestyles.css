@@ -266,7 +266,6 @@ ul.CTAs a {
 
 .submit5{
     background: #CCB3A3;
-    color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 3px;
@@ -276,12 +275,32 @@ ul.CTAs a {
     margin-bottom: 10px;
   }
 
-  .submit4:hover{
+  .submit5:hover{
     background: #0094FF;
     text-align: center;
     color: #fff;
 }
 
+.submit6 {
+    display: block;
+    margin: 0 auto;
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background: #D66161;
+    border-radius: 10px;
+    transition: .4s;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
+}
+.submit6:hover{
+    background: #0094FF;
+    text-align: center;
+    color: #fff;
+}
 
 
 .popup {
@@ -329,19 +348,6 @@ ul.CTAs a {
   .label{
     color: #000;
   }
-  
-  .button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: 10px;
-    float: right;
-    margin-bottom: 10px;
-  }
-
   
   label {
     color: #868686;

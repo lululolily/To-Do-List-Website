@@ -106,7 +106,7 @@
                   <div class="column left">
                     <img src="assets\profile.png" class="profile-image">
                     <div class="input-field">
-                      <button class="submit1">Upload Photo</button>
+                      <button onclick="openPhotoPopup()"  type="button"class="submit1">Upload Photo</button>
                   </div>
                   </div>
                     
@@ -148,7 +148,18 @@
             </div>
         </div>
     </div>
-    <div class="popup" id="username-popup" >
+    <div class="popup" id="photo-popup">
+      <div class="popup-header">
+        <h2>Change Email</h2>
+      </div>
+      <form class="dialog">
+        <label class=label for="uploadPhoto">Upload Photo</label>
+        <button type="submit" class="submit6">Select File</button>
+        <button type="button" onclick="closePhotoPopup()" class="submit5">Cancel</button>
+        <button type="submit" class="submit5">Save</button>
+      </form>
+      </div>
+      <div class="popup" id="username-popup" >
         <div class="popup-header">
           <h2>Change Username</h2>
         </div>
@@ -198,11 +209,20 @@
             });
         });
 
+      let photoPopup = document.getElementById("photo-popup");
       let usernamePopup = document.getElementById("username-popup");
       let emailPopup = document.getElementById("email-popup");
       let passwordPopup = document.getElementById("password-popup");
 
-    function openUsernamePopup() {
+    function openPhotoPopup() {
+    photoPopup.classList.add("open-popup");
+     }
+
+    function closePhotoPopup() {
+    photoPopup.classList.remove("open-popup");
+      }
+
+      function openUsernamePopup() {
     usernamePopup.classList.add("open-popup");
      }
 

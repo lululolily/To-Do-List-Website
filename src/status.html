@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-    <link rel="stylesheet" href="styles\statusstyles.css">
+    <link rel="stylesheet" href="styles\indexstyles.css">
 
   </head>
 
@@ -27,13 +27,13 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false">Tasks</a>
               <ul class="collapse list-unstyled" id="pageSubmenu">
-                  <li class="active">
+                  <li>
                       <a class="dropdown-item" href="summary.html">Summary</a>
                   </li>
                   <li>
                       <a class="dropdown-item" href="category.html">Category</a>
                   </li>
-                  <li>
+                  <li class="active">
                       <a class="dropdown-item" href="status.html">Status</a>
                   </li>
                   <li>
@@ -42,7 +42,7 @@
               </ul>
           </li>
           <li>
-            <a href="#">Settings</a>
+            <a href="profile.html">Settings</a>
           </li>
           <li>
               <a href="#">About Us</a>
@@ -101,11 +101,17 @@
                     </div>
                   </ul>
                 </div>                  
-                <button type="button" class="btn">
-                  <span class="navbar-text">
-                    <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
-                  </span>
-                </button>
+                <div class="dropdown-profile">
+                  <button type="button" class="btn">
+                    <span class="navbar-text">
+                      <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
+                    </span>
+                    <div class="dropdown-content-profile">
+                      <a href="profile.html">Manage Profile</a>
+                      <a href="logout.html">Logout</a>
+                    </div>
+                  </button>
+                </div>   
             </div>
         </nav>
 
@@ -120,26 +126,36 @@
                   <a href="summary.html"><button><i class="fa-regular fa-clipboard fa-xl"></i>Tasks Summary</button></a>
                   <a href="status.html"><button class="active"><i class="fa-regular fa-clipboard fa-xl"></i>By Status</button></a>
                   <a href="category.html"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Category</button></a>
+                  <a href="progress.html"><button><i class="fa-regular fa-bar-chart fa-xl"></i>View Progress</button></a>
               </div>
                 <div class="content">
-                  <div class="content-left">
+                  <div class="status-list">
                     <div class="board">
-                      <div class="column">
-                        <h3><span class="badge bg-info">To-Do</span></h3>
-                        <button type="button" class="list">
-                          <h5>Tutorial Web Programming</h5>
-                          <h6 class="tododate" style="display: inline-block;">Thu, 20 April</h6>
-                          <h6 class="todotime" style="display: inline-block;">10:00 pm</h6>
+                      <div class="column col-sm">
+                        <h3><span class="badge rounded-pill bg-dark">To-Do</span></h3>
+                        <button type="button" class="weeklist">
+                          <h5>Tutorial ADA</h5>
+                          <h6 class="deadlinedate" style="display: inline-block;">Mon, 8 May, 11:59 pm</h6>
+                          <div class="badges">
+                            <p class="badge bg-warning">Deadline</p>
+                            <p class="badge bg-dark">To-Do</p>
+                          </div>
                         </button>
-                        <button type="button" class="list">
-                          <h5>Study JavaScript</h5>
-                          <h6 class="tododate" style="display: inline-block;">Sun, 23 April</h6>
-                          <h6 class="todotime" style="display: inline-block;">9:30 pm</h6>
+                        <button type="button" class="weeklist">
+                          <h5>Dental Appointment</h5>
+                          <h6 class="prioritydate" style="display: inline-block;">Wed, 10 May, 9:00 am</h6>
+                          <div class="badges">
+                            <p class="badge bg-info">Priority 2</p>
+                            <p class="badge bg-dark">To-Do</p>
+                          </div>
                         </button>
-                        <button type="button" class="list">
-                          <h5>Meeting w/ Group Members</h5>
-                          <h6 class="tododate" style="display: inline-block;">Wed, 19 April</h6>
-                          <h6 class="todotime" style="display: inline-block;">2:30 pm</h6>
+                        <button type="button" class="weeklist">
+                          <h5>Buy groceries</h5>
+                          <h6 class="prioritydate" style="display: inline-block;">Tue, 9 May, 11:00 am</h6>
+                          <div class="badges">
+                            <p class="badge bg-light text-dark">Priority 3</p>
+                            <p class="badge bg-dark">To-Do</p>
+                          </div>
                         </button>
                         <button onclick="openPopup()" type="button" class="tasks">
                           <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
@@ -148,31 +164,47 @@
                       </div>
                     </div>
                   </div>
-                  <div class="content-middle">
+                  <div class="status-list">
                     <div class="board">
-                      <div class="column">
-                        <h3><span class="badge bg-secondary">In Progress</span></h3>
-                        <button type="button" class="list">
-                          <h5>FOP Project Assignment!!</h5>
-                          <h6 class="inprogressdate" style="display: inline-block;">Tue, 18 April</h6>
-                          <h6 class="inprogresstime" style="display: inline-block;">11:59 pm</h6>
+                      <div class="column col-sm">
+                        <h3><span class="badge rounded-pill bg-secondary">In Progress</span></h3>
+                        <button type="button" class="weeklist">
+                          <h5>Tutorial Web Programming</h5>
+                          <h6 class="prioritydate" style="display: inline-block;">Mon, 8 May, 10:00 pm</h6>
+                          <div class="badges">
+                            <p class="badge bg-danger">Priority 1</p>
+                            <p class="badge bg-secondary">In Progress</p>
+                          </div>
+                        </button>  
+                        <button type="button" class="weeklist">
+                          <h5>Research Proposal Submission</h5>
+                          <h6 class="deadlinedate" style="display: inline-block;">Tue, 9 May, 9:00 pm</h6>
+                          <div class="badges">
+                            <p class="badge bg-warning">Deadline</p>
+                            <p class="badge bg-secondary">In Progress</p>
+                          </div>
                         </button>
-                        <button type="button" class="list">
-                          <h5>Lab Report Data Structure</h5>
-                          <h6 class="inprogressdate" style="display: inline-block;">Sat, 22 April</h6>
-                          <h6 class="inprogresstime" style="display: inline-block;">6:00 pm</h6>
+                        <button onclick="openPopup()" type="button" class="tasks">
+                          <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
+                          <label class="add mx-3" style="display: inline-block;">Add Task</label>
                         </button>
                       </div>
                     </div>
                   </div>
-                  <div class="content-right">
+                  <div class="status-list">
                     <div class="board">
-                      <div class="column">
-                        <h3><span class="badge bg-success">Completed</span></h3>
-                        <button type="button" class="list">
-                          <h5>Figma</h5>
-                          <h6 class="completeddate" style="display: inline-block;">Sun, 16 April</h6>
-                          <h6 class="completedtime" style="display: inline-block;">11:59 pm</h6>
+                      <div class="column col-sm">
+                        <h3><span class="badge rounded-pill bg-success">Completed</span></h3>
+                        <button type="button" class="weeklist">
+                          <h5><s>MAD Project Figma Design</s></h5>
+                          <h6 class="deadlinedate" style="display: inline-block;">Sun, 7 May, 10:30 pm</h6>
+                          <div class="badges">
+                            <p class="badge bg-success">Completed</p>
+                          </div>
+                        </button>
+                        <button onclick="openPopup()" type="button" class="tasks">
+                          <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
+                          <label class="add mx-3" style="display: inline-block;">Add Task</label>
                         </button>
                       </div>
                     </div>

@@ -14,41 +14,40 @@
   </head>
 
     <div class="wrapper">
-      <!-- Sidebar  -->
       <nav id="sidebar">
-          <div class="sidebar-header">
-              <h3>Minni<br>TO-DO List</h3>
-          </div>
+        <div class="sidebar-header">
+            <h3>Minni<br>TO-DO List</h3>
+        </div>
 
-          <ul class="list-unstyled components">
-              <li class="active">
-                  <a href="index.html">Today</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false">Tasks</a>
-                  <ul class="collapse list-unstyled" id="pageSubmenu">
-                      <li>
-                          <a class="dropdown-item" href="summary.html">Summary</a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="category.html">Category</a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="status.html">Status</a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="progress.html">Progress</a>
-                      </li>
-                  </ul>
-              </li>
-              <li>
-                <a href="#">Settings</a>
-              </li>
-              <li>
-                  <a href="#">About Us</a>
-              </li>
-          </ul>
-      </nav>
+        <ul class="list-unstyled components">
+          <li class="active">
+              <a href="index.html">Today</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false">Tasks</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <li>
+                      <a class="dropdown-item" href="summary.html">Summary</a>
+                  </li>
+                  <li>
+                      <a class="dropdown-item" href="category.html">Category</a>
+                  </li>
+                  <li>
+                      <a class="dropdown-item" href="status.html">Status</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="progress.html">Progress</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="profile.html">Settings</a>
+          </li>
+          <li>
+              <a href="#">About Us</a>
+          </li>
+      </ul>
+    </nav>
 
       <!-- Page Content  -->
       <div id="content">
@@ -100,12 +99,20 @@
                         </div>
                       </div>
                     </ul>
-                  </div>                  
-                  <button type="button" class="btn">
-                    <span class="navbar-text">
-                      <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
-                    </span>
-                  </button>
+                  </div>   
+                  <div class="dropdown-profile">
+                    <button type="button" class="btn">
+                      <span class="navbar-text">
+                        <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
+                      </span>
+                      <div class="dropdown-content-profile">
+                        <a href="profile.html">Manage Profile</a>
+                        <a href="logout.html">Logout</a>
+                      </div>
+                    </button>
+                    
+                  </div>               
+                  
               </div>
           </nav>
 

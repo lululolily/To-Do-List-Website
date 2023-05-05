@@ -6,6 +6,7 @@
 body {
     font-family: 'Josefin Sans', sans-serif;
     background: #fafafa;
+    transform: scale (0.9 , 0.9);
 }
 
 .bg-image {
@@ -38,10 +39,14 @@ p {
 
 .prioritydate {
     color: #4700DD;
+    display: inline-block;
+    margin-bottom: 0px;
 }
 
 .deadlinedate {
     color: #FF0000;
+    display: inline-block;
+    margin-bottom: 0px;
 }
 
 .deadlinetime {
@@ -94,7 +99,7 @@ a:focus {
     max-width: 250px;
     background: #f3f3f3;
     color: #000;
-    height: 100vh; 
+    height: 100vh;
     position: sticky;
     top: 0;
     transition: all 0.3s;
@@ -121,7 +126,7 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     display: block;
 }
 
@@ -154,7 +159,7 @@ a[data-toggle="collapse"] {
 }
 
 ul ul a {
-    font-size: 0.9em !important;
+    font-size: 1.0em !important;
     padding-left: 30px !important;
     background: #6d7fcc;
 }
@@ -176,24 +181,31 @@ ul.CTAs a {
 ----------------------------------------------------- */
 
 #content {
-    width: 100%;
-    padding: 10px;
-    min-height: 100vh;
-    transition: all 0.3s;
+  width: 100%;
+  padding: 10px;
+  min-height: 100vh;
+  transition: all 0.3s;
 }
 
 .content {
-    display: flex;
-    
+  display: inline-flex;
+  width: 1240px;
 }
 
 .content-left {
-    float:left;
+  float:left;
 }
 
 .content-right {
-    float:right;
-    margin-left: 50px;
+  float:right;
+  margin-left: 75px;
+}
+
+.container {
+  margin-left: 48px;
+  margin-right: 20px;
+  overflow: hidden !important;
+  width: auto;
 }
 
 .btn{
@@ -213,20 +225,36 @@ ul.CTAs a {
 
 .list {
     width: 330px;
-    height: 80px;
+    height: 90px;
     left: 90px;
     top: 342px;
-    padding-top: 15px;
+    padding-top: 10px;
     padding-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* margin-top: 20px; */
+    margin-bottom: 15px;
     display: block;
     text-align: left;
     border: none;
-
     background: rgb(255, 255, 255);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+}
+
+.weeklist {
+  width: 330px;
+  height: auto;
+  left: 90px;
+  top: 342px;
+  padding-top: 20px;
+  padding-left: 25px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  display: block;
+  text-align: left;
+  border: none;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 }
 
 .task {
@@ -243,6 +271,26 @@ ul.CTAs a {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
+}
+
+.badges {
+  display: block;
+  /* gap: 5px; */
+  margin: 0 !important;
+}
+
+.badges .badge {
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+}
+
+
+.circle i.fas{
+  display: inline-block;
+  border-radius: 80px;
+  box-shadow: 0 0 2px black;
+  padding: 0.2em 0.5em;
 }
 
 .add-task {
@@ -324,6 +372,7 @@ ul.CTAs a {
 
 .tab{
     margin-top: 8px;
+    overflow-x: auto;
 }
 
 .btn-box{
@@ -358,6 +407,16 @@ ul.CTAs a {
 .column .badge.rounded-pill{
     
     padding: 7px 20px;
+}
+
+.column h3{
+  margin-bottom: 10px;
+}
+
+.daylist .column{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 30px;
 }
 
 .popup {
@@ -490,15 +549,6 @@ ul.CTAs a {
   .notify{
     color: black !important;
     margin-bottom: -2px;
-  }
-
-  .notification-footer{
-    display: flex;
-    justify-content: center;
-  }
-
-  .notification-footer .btn{
-    width: 325px;
   }
 
   .notification-list--priority {

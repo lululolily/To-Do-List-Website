@@ -24,14 +24,11 @@
               <li class="active">
                   <a href="index.html">Today</a>
               </li>
-              <li>
-                  <a href="#">Notifications</a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false">Tasks</a>
                   <ul class="collapse list-unstyled" id="pageSubmenu">
                       <li>
-                          <a class="dropdown-item" href="#">Summary</a>
+                          <a class="dropdown-item" href="summary.html">Summary</a>
                       </li>
                       <li>
                           <a class="dropdown-item" href="category.html">Category</a>
@@ -45,7 +42,10 @@
                   </ul>
               </li>
               <li>
-                  <a href="#">About</a>
+                <a href="#">Settings</a>
+              </li>
+              <li>
+                  <a href="#">About Us</a>
               </li>
           </ul>
       </nav>
@@ -90,17 +90,14 @@
                       <div class="notification-content">
                         <div class="notification-list notification-list--priority">
                           <p class="notify"><b>Tutorial Web Programming</b><br>
-                            <small>due Today 18 April, 12:00 pm</small>
+                            <small>due Today 8 May, 10:00 pm</small>
                           </p>
                         </div>
                         <div class="notification-list notification-list--deadline">
                           <p class="notify"><b>Tutorial ADA</b><br>
-                            <small>due Today 18 April, 6:00 pm</small>
+                            <small>due Today 8 May, 11:59 pm</small>
                           </p>
                         </div>
-                      </div>
-                      <div class="notification-footer">
-                        <a href="#!" class="btn btn-success btn-block">View All</a>
                       </div>
                     </ul>
                   </div>                  
@@ -117,19 +114,19 @@
             <div class="container mx-5">
               <header id="header">
                 <h1 style="display: inline-block;"><b>Today</b></h1>
-                <h6 class=date style="display: inline-block;">&nbsp 18 April</h6>
+                <h6 class=date style="display: inline-block;">&nbsp 8 May</h6>
               </header>
               <div class="board">
-                <div class="column">
-                  <h3>Tuesday</h3>
+                <h3>Tuesday</h3>
+                <div class="column col-sm">
                   <button type="button" class="task d-flex flex-column">
                     <div class="d-flex align-items-center">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                       <label class="form-check-label" for="flexCheckDefault">Tutorial Web Programming</label>
                     </div>
                     <div>
-                      <p class="badge bg-danger">Priority</p>
-                      <p class="badge bg-info">To-Do</p>
+                      <p class="badge bg-danger">Priority 1</p>
+                      <p class="badge bg-dark">To-Do</p>
                     </div>
                   </button>
                   <button type="button" class="task d-flex flex-column">
@@ -146,10 +143,11 @@
                   <button type="button" class="task d-flex flex-column">
                     <div class="d-flex align-items-center">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      <label class="form-check-label" for="flexCheckDefault">Do laundry</label>
+                      <label class="form-check-label" for="flexCheckDefault">Cooking class!</label>
                     </div>
                     <div>
-                      <p class="badge bg-success">Completed</p>
+                      <p class="badge bg-info">Priority 2</p>
+                      <p class="badge bg-dark">To-Do</p>
                     </div>
                   </button>
                   <button onclick="openPopup()" type="button" class="add-task">
@@ -175,16 +173,18 @@
                   <label for="category">Category:</label><br>
                   <select class="custom-select" id="category" name="category" required>
                     <option value="">--Select--</option>
-                    <option value="Priority" data-icon="fa-solid fa-circle" style="color: red;">Priority</option>
-                    <option value="Deadline" data-icon="fa-solid fa-circle" style="color: red;">Deadline</option>
+                    <option value="Priority 1">Priority 1</option>
+                    <option value="Priority 2">Priority 2</option>
+                    <option value="Priority 3">Priority 3</option>
+                    <option value="Deadline">Deadline</option>
                   </select><br>
             
                   <label for="status">Status:</label><br>
                   <select class="custom-select" id="status" name="status"  required>
                     <option value="">--Select--</option>
-                    <option value="To-Do" data-icon="fa-solid fa-circle">To-Do</option>
-                    <option value="In Progress" data-icon="fa-solid fa-circle">In Progress</option>
-                    <option value="Completed" data-icon="fa-solid fa-circle">Completed</option>
+                    <option value="To-Do">To-Do</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
                   </select><br>
             
                   <button type="button" onclick="closePopup()" class="button">Cancel</button>

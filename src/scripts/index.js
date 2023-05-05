@@ -60,15 +60,19 @@ var checkboxes = document.querySelectorAll('.form-check-input');
             let categoryClass, statusClass;
   
             if (status === "To-Do") {
-              statusClass = "badge bg-info";
+              statusClass = "badge bg-dark";
             } else if (status === "In Progress") {
               statusClass = "badge bg-secondary";
             } else if (status === "Completed") {
               statusClass = "badge bg-success";
             } 
 
-            if (category === "Priority") {
+            if (category === "Priority 1") {
               categoryClass = "badge bg-danger";
+            } else if (category === "Priority 2") {
+              categoryClass = "badge bg-info";
+            } else if (category === "Priority 3") {
+              categoryClass = "badge bg-light";
             } else if (category === "Deadline") {
               categoryClass = "badge bg-warning";
             }

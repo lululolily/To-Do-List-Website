@@ -90,6 +90,9 @@ a:focus {
     max-width: 250px;
     background: #f3f3f3;
     color: #000;
+    height: 100vh;
+    position: sticky;
+    top: 0;
     transition: all 0.3s;
 }
 
@@ -175,7 +178,7 @@ ul.CTAs a {
 }
 
 .container {
-    max-width: 1250px;
+    max-width: 1150px;
 }
 
 
@@ -449,6 +452,82 @@ a[aria-expanded="true"] {
     color: white;
     padding: 15px;
     border-radius: 10px;
+  }
+
+  .popup-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+  }
+  
+  .reminder-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    border-radius: 15px;
+  }
+
+  .dialog-form {
+    padding: 12px 20px;
+  }
+  
+  input[type="text"], select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #000;
+  }
+
+  .date-time{
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 360px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+  
+  .button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    float: right;
+    margin-bottom: 10px;
+  }
+
+  .select2-container {
+    width: 100% !important;
+    margin-bottom: 12px;
+  }
+
+  .select2.select2-container .select2-selection {
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 10px;
+    border-color: #000;
+    padding: 7px 5px;
+    height: 40px;
+    outline: none !important;
+    transition: all .15s ease-in-out;
+  }
+
+  .select2-selection__arrow {
+    height: 30px !important;
+    top: 5px !important;
+    margin-right: 5px;
   }
 
 .nav-link {

@@ -53,7 +53,7 @@
       <!-- Page Content  -->
       <div id="content">
 
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
               <div class="container-fluid">
 
                 <button type="button" id="sidebarCollapse" class="btn btn-light">
@@ -226,6 +226,42 @@
         </form>
       </div>
     </div>
+    <div id="popup" class="popup-form">
+      <div class="reminder-form">
+        <div class="header">
+          <h2>Set Task</h2>
+        </div>
+        <div class="dialog-form">
+        <form id="form" onsubmit="saveReminder(event)">
+          <label for="task-name">Task Name:</label>
+          <input type="text" id="task-name" name="task-name" required>
+    
+          <label for="due-date">Set Due Date:</label>
+          <input type="datetime-local" class="date-time" id="date-time" name="date-time" required>
+    
+          <label for="category">Category:</label><br>
+          <select class="custom-select" id="category" name="category" required>
+            <option value="">--Select--</option>
+            <option value="Priority 1">Priority 1</option>
+            <option value="Priority 2">Priority 2</option>
+            <option value="Priority 3">Priority 3</option>
+            <option value="Deadline">Deadline</option>
+          </select><br>
+    
+          <label for="status">Status:</label><br>
+          <select class="custom-select" id="status" name="status"  required>
+            <option value="">--Select--</option>
+            <option value="To-Do">To-Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select><br>
+    
+          <button type="button" onclick="closePopup()" class="button">Cancel</button>
+          <button type="submit" class="button">Save</button>
+        </form>
+        </div>
+      </div>
+    </div>
 
 
 
@@ -235,5 +271,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script type="text/javascript" src="scripts/profile.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.custom-select').select2({
+          minimumResultsForSearch: Infinity,
+          templateResult: function(data) {
+            var $icon = $(data.element).data('icon');
+            var $text = $(data.element).text();
+            if (!$icon) {
+              return $text;
+            } else {
+              return $('<span><i class="' + $icon + '"></i> ' + $text + '</span>');
+            }
+          },
+          templateSelection: function(data) {
+            var $icon = $(data.element).data('icon');
+            var $text = $(data.element).text();
+            if (!$icon) {
+              return $text;
+            } else {
+              return $('<span><i class="' + $icon + '"></i> ' + $text + '</span>');
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>

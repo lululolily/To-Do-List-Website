@@ -521,6 +521,10 @@ ul.CTAs a {
   }
 
   .dropdown-menu{
+    width: auto;
+  }
+
+  .dropdown .dropdown-menu{
     width: 350px;
   }
 

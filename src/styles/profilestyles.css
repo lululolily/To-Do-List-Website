@@ -35,6 +35,11 @@ p {
     color: #999;
 }
 
+.text p{
+    font-size: 2em;
+    color: brown;
+}
+
 h6 {
     color:gray;
 }
@@ -169,6 +174,21 @@ ul.CTAs a {
     transition: all 0.3s;
 }
 
+.container {
+    max-width: 1250px;
+}
+
+
+.contents {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+}
+
+.row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .btn li {
     list-style: none;
   }
@@ -195,14 +215,23 @@ a[aria-expanded="true"] {
   
   .left {
     width: 30%;
+    padding-top: 10px;
+    border-right: 1px solid #c6c6c6;
   }
   
   .right {
     width: 70%;
+    padding-top: 20px;
+    padding-left: 50px;
   }
 
 .input-field{
     padding: 0 20px 0 20px;
+    margin-bottom: 10px;
+  }
+
+  .input-manage{
+    padding: 10px 0 5px;
     margin-bottom: 10px;
   }
 
@@ -229,7 +258,7 @@ a[aria-expanded="true"] {
 .submit2 {
     display: block;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: 50px;
     border: none;
     outline: none;
     text-align: center;
@@ -266,7 +295,7 @@ a[aria-expanded="true"] {
 .submit4 {
     display: block;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: 50px;
     border: none;
     outline: none;
     text-align: center;
@@ -325,25 +354,67 @@ a[aria-expanded="true"] {
 
 .popup {
     position: fixed;
+    top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     width: 400px;
     border-radius: 10px;
-    padding: auto;
     background-color: white;
+    display: none;
+  }
+  
+  .open-popup {
     display: block;
-    transition: visibility 0s, opacity 0.3s linear;
-
   }
 
-  .open-popup{
-    visibility: visible;
-    top: 50%;
-    transform: translate(-50%,-50%) scale(1);
+  .show-popup {
+    display: block;
   }
 
+  .overlay-pfp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+
+  .overlay-name {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+  
+  .overlaymail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+
+  .overlaypass {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+  
   .dialog {
     padding: 12px 20px;
   }
+  
 
   .header {
     padding-top: 14px;
@@ -401,6 +472,67 @@ a[aria-expanded="true"] {
 h6{
     margin-top: 0;
 }
+
+.dropdown-menu{
+    width: auto;
+  }
+
+  .dropdown .dropdown-menu{
+    width: 350px;
+  }
+
+  .notification-header{
+    padding: 5px 20px;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0px;
+  }
+
+  .notification-content{
+    margin: 7px;
+  }
+
+  .notification-list{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 5px 0;
+    margin: 0 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notify{
+    color: black !important;
+    margin-bottom: -2px;
+  }
+
+  .notification-list--priority {
+    position: relative;
+  }
+  
+  .notification-list--priority:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -22px;
+    height: calc(100% + 1px);
+    border-left: 5px solid #ff0000;
+  }
+
+  .notification-list--deadline {
+    position: relative;
+  }
+  
+  .notification-list--deadline:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -22px;
+    height: calc(100% + 1px);
+    border-left: 5px solid #f8ff22;
+  }
 
 /* ---------------------------------------------------
     MEDIAQUERIES

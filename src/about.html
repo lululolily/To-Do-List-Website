@@ -101,11 +101,17 @@
                       </div>
                     </ul>
                   </div>                  
-                  <button type="button" class="btn">
-                    <span class="navbar-text">
-                      <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
-                    </span>
-                  </button>
+                  <div class="dropdown-profile" style="float:right;">
+                    <button type="button" class="btn">
+                      <span class="navbar-text">
+                        <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
+                      </span>
+                    </button>
+                    <div class="dropdown-content-profile">
+                      <a href="profile.html">Manage Profile</a>
+                      <a href="logout.html">Log Out</a>
+                    </div>
+                  </div>
               </div>
           </nav>
 
@@ -135,6 +141,41 @@
                             <p style="font-size: 14px; text-align: center;">Contact Us: u2102845@siswa.um.edu.my<i></i></p>
                             </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="popup" class="popup">
+              <div class="reminder-form">
+                <div class="header">
+                  <h2>Set Task</h2>
+                </div>
+                <div class="dialog">
+                <form id="form" onsubmit="saveReminder(event)">
+                  <label for="task-name">Task Name:</label>
+                  <input type="text" id="task-name" name="task-name" required>
+            
+                  <label for="due-date">Set Due Date:</label>
+                  <input type="datetime-local" class="date-time" id="date-time" name="date-time" required>
+            
+                  <label for="category">Category:</label><br>
+                  <select class="custom-select" id="category" name="category" required>
+                    <option value="">--Select--</option>
+                    <option value="Priority" data-icon="fa-solid fa-circle">Priority</option>
+                    <option value="Deadline" data-icon="fa-solid fa-circle">Deadline</option>
+                  </select><br>
+            
+                  <label for="status">Status:</label><br>
+                  <select class="custom-select" id="status" name="status"  required>
+                    <option value="">--Select--</option>
+                    <option value="To-Do" data-icon="fa-solid fa-circle">To-Do</option>
+                    <option value="In Progress" data-icon="fa-solid fa-circle">In Progress</option>
+                    <option value="Completed" data-icon="fa-solid fa-circle">Completed</option>
+                  </select><br>
+            
+                  <button type="button" onclick="closePopup()" class="button">Cancel</button>
+                  <button type="submit" class="button">Save</button>
+                </form>
                 </div>
               </div>
             </div>

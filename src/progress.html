@@ -242,6 +242,40 @@
 
               </div>
               <!--page content-->
+              <div id="popup" class="popup">
+                <div class="reminder-form">
+                  <div class="header">
+                    <h2>Set Task</h2>
+                  </div>
+                  <div class="dialog">
+                  <form id="form" onsubmit="saveReminder(event)">
+                    <label for="task-name">Task Name:</label>
+                    <input type="text" id="task-name" name="task-name" required>
+              
+                    <label for="due-date">Set Due Date:</label>
+                    <input type="datetime-local" class="date-time" id="date-time" name="date-time" required>
+              
+                    <label for="category">Category:</label><br>
+                    <select class="custom-select" id="category" name="category" required>
+                      <option value="">--Select--</option>
+                      <option value="Priority" data-icon="fa-solid fa-circle">Priority</option>
+                      <option value="Deadline" data-icon="fa-solid fa-circle">Deadline</option>
+                    </select><br>
+              
+                    <label for="status">Status:</label><br>
+                    <select class="custom-select" id="status" name="status"  required>
+                      <option value="">--Select--</option>
+                      <option value="To-Do" data-icon="fa-solid fa-circle">To-Do</option>
+                      <option value="In Progress" data-icon="fa-solid fa-circle">In Progress</option>
+                      <option value="Completed" data-icon="fa-solid fa-circle">Completed</option>
+                    </select><br>
+              
+                    <button type="button" onclick="closePopup()" class="button">Cancel</button>
+                    <button type="submit" class="button">Save</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
 
               <!-- Link to jQuery and Bootstrap JavaScript -->
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>

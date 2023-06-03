@@ -22,7 +22,7 @@ if(isset($_POST['login']))
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
             if ($data['password'] === $password) {
-                header("Location: index.html");
+                header("Location: index.php");
                 exit();
             } else {
                 echo "<h2>Invalid Email or password</h2>";

@@ -14,7 +14,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <link rel="stylesheet" href="styles\indexstyles.css">
-    
+    <script>
+      function updateDate() {
+        var currentDate = new Date();
+      
+        var dayOptions = { weekday: 'long' };
+        var day = currentDate.toLocaleDateString('en-MY', dayOptions);
+
+        var dateOptions = { day: 'numeric', month: 'long' };
+        var date = currentDate.toLocaleDateString('en-MY', dateOptions);
+
+        var dayElement = document.getElementById("day");
+        dayElement.innerHTML = day;
+
+        var dateElement = document.getElementById("date");
+        dateElement.innerHTML = date;
+      }
+      setInterval(updateDate, 10);
+    </script>
   </head>
 
     <div class="wrapper">
@@ -125,10 +142,10 @@
             <div class="container mx-5">
               <header id="header">
                 <h1 style="display: inline-block;"><b>Today</b></h1>
-                <h6 class=date style="display: inline-block;">&nbsp 8 May</h6>
+                <h6 class=date style="display: inline-block;">&nbsp <span id="date"></span></h6>
               </header>
               <div class="board">
-                <h3>Tuesday</h3>
+                <h3><span id="day"></span></h3>
 
                 <div class="column col-sm">
                 <?php
@@ -138,6 +155,9 @@
 
                             $categoryClass = "";
                             $statusClass = "";
+                            $dateComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('Y-m-d');
+                            date_default_timezone_set('Asia/Kuala_Lumpur');
+                            $today = date("Y-m-d"); 
 
                             if ($row['status'] === "To-Do") {
                               $statusClass = "badge bg-dark";
@@ -157,7 +177,8 @@
                               $categoryClass = "badge bg-warning";
                             }
 
-                      echo '<div class="task d-flex flex-column">
+                            if($dateComponent === $today){
+                            echo '<div class="task d-flex flex-column">
                               <div class="d-flex align-items-center">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">'.$row['taskname'].'</label>
@@ -170,6 +191,7 @@
                                 <i class="fa-solid fa-pen fa-sm"></i>
                               </button>
                             </div>';
+                          }
                         }
                   ?>
                   <button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="add-task">

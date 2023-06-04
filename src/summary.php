@@ -32,43 +32,45 @@
       }
       setInterval(updateDate, 10);
     </script>
+
   </head>
 
     <div class="wrapper">
+      <!-- Sidebar  -->
       <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Minni<br>TO-DO List</h3>
-        </div>
+          <div class="sidebar-header">
+              <h3>Minni<br>TO-DO List</h3>
+          </div>
 
-        <ul class="list-unstyled components">
-          <li class="active">
-              <a href="index.php">Today</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false">Tasks</a>
-              <ul class="collapse list-unstyled" id="pageSubmenu">
-                  <li>
-                      <a class="dropdown-item" href="summary.php">Summary</a>
+          <ul class="list-unstyled components">
+            <li>
+                <a href="index.php">Today</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false">Tasks</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <li class="active">
+                    <a class="dropdown-item" href="summary.php">Summary</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="status.html">Status</a>
                   </li>
                   <li>
-                      <a class="dropdown-item" href="category.html">Category</a>
+                    <a class="dropdown-item" href="category.html">Category</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="progress.html">Progress</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="profile.html">Settings</a>
-          </li>
-          <li>
+                </ul>
+            </li>
+            <li>
+              <a href="profile.html">Settings</a>
+            </li>
+            <li>
               <a href="about.html">About Us</a>
-          </li>
-      </ul>
-    </nav>
+            </li>
+        </ul>
+      </nav>
 
       <!-- Page Content  -->
       <div id="content">
@@ -120,7 +122,7 @@
                         </div>
                       </div>
                     </ul>
-                  </div>   
+                  </div>                  
                   <div class="dropdown-profile">
                     <button type="button" class="btn">
                       <span class="navbar-text">
@@ -132,76 +134,84 @@
                       </div>
                     </button>
                     
-                  </div>               
-                  
+                  </div>   
               </div>
           </nav>
 
           <body>
             <img src="assets\background.png" class="bg-image">
-            <div class="container mx-5">
+            <div class="container">
               <header id="header">
-                <h1 style="display: inline-block;"><b>Today</b></h1>
-                <h6 class=date style="display: inline-block;">&nbsp <span id="date"></span></h6>
+                <h2><b>TO-DO Summary</b></h2>
               </header>
-              <div class="board">
-                <h3><span id="day"></span></h3>
-
-                <div class="column col-sm">
+              <div class="tab-summary">
+                <div class="btn-box">
+                    <a href="summary.html"><button class="active"><i class="fa-regular fa-clipboard fa-xl"></i>Tasks Summary</button></a>
+                    <a href="status.html"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Status</button></a>
+                    <a href="category.html"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Category</button></a>
+                    <a href="progress.html"><button><i class="fa-regular fa-bar-chart fa-xl"></i>View Progress</button></a>
+                </div>
+                <div class="week-container">
                 <?php
+                  $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+                  foreach ($daysOfWeek as $day) {
+                    echo '<div class="daylist">
+                            <div class="board">
+                              <div class="column col-sm">
+                                <h3>' . $day . '</h3>';
+                 
                     $sql = "SELECT * FROM `tasks`";
                     $result = mysqli_query($conn, $sql);
-                    while($row = mysqli_fetch_array($result)){
-
-                            $categoryClass = "";
-                            $statusClass = "";
-                            $dateComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('Y-m-d');
-                            date_default_timezone_set('Asia/Kuala_Lumpur');
-                            $today = date("Y-m-d"); 
-
-                            if ($row['status'] === "To-Do") {
-                              $statusClass = "badge bg-dark";
-                            } else if ($row['status'] === "In Progress") {
-                              $statusClass = "badge bg-secondary";
-                            } else if ($row['status'] === "Completed") {
-                              $statusClass = "badge bg-success";
-                            } 
-                
-                            if ($row['category'] === "Priority 1") {
-                              $categoryClass = "badge bg-danger";
-                            } else if ($row['category'] === "Priority 2") {
-                              $categoryClass = "badge bg-info";
-                            } else if ($row['category'] === "Priority 3") {
-                              $categoryClass = "badge bg-light text-dark";
-                            } else if ($row['category'] === "Deadline") {
-                              $categoryClass = "badge bg-warning";
-                            }
-
-                            if($dateComponent === $today){
-                            echo '<div class="task d-flex flex-column">
-                              <div class="d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">'.$row['taskname'].'</label>
+    
+                    while ($row = mysqli_fetch_array($result)) {
+                      $categoryClass = "";
+                      $statusClass = "";
+                      $dayComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('l');
+                      $dateComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('D, j M, g:i a');
+        
+                      if ($row['status'] === "To-Do") {
+                        $statusClass = "badge bg-dark";
+                      } else if ($row['status'] === "In Progress") {
+                        $statusClass = "badge bg-secondary";
+                      } else if ($row['status'] === "Completed") {
+                        $statusClass = "badge bg-success";
+                      }
+        
+                      if ($row['category'] === "Priority 1") {
+                        $categoryClass = "badge bg-danger";
+                      } else if ($row['category'] === "Priority 2") {
+                        $categoryClass = "badge bg-info";
+                      } else if ($row['category'] === "Priority 3") {
+                        $categoryClass = "badge bg-light text-dark";
+                      } else if ($row['category'] === "Deadline") {
+                        $categoryClass = "badge bg-warning";
+                      }
+        
+                      if ($dayComponent === $day) {
+                        echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$row['id'].'">
+                              <h5>' . $row['taskname'] . '</h5>
+                              <h6 class="prioritydate" style="display: inline-block;">' . $dateComponent . '</h6>
+                              <div class="badges">
+                                <p class="' . $categoryClass . '">' . $row['category'] . '</p>
+                                <p class="' . $statusClass . '">' . $row['status'] . '</p>
                               </div>
-                              <div>
-                                <p class="'.$categoryClass.'">'.$row['category'].'</p>
-                                <p class="'.$statusClass.'">'.$row['status'].'</p>
-                              </div>
-                              <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editTask'.$row['id'].'">
-                                <i class="fa-solid fa-pen fa-sm"></i>
-                              </button>
-                            </div>';
-                          }
+                          </button>';
                         }
-                  ?>
-                  <button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="add-task">
-                      <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
-                      <label class="add mx-3" style="display: inline-block;">Add Task</label>
-                  </button>
-                </div>
+                    }
+    
+                    echo '<button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="tasks">
+                          <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
+                          <label class="add mx-3" style="display: inline-block;">Add Task</label>
+                          </button>
+                        </div>
+                      </div>
+                    </div>';
+                  }
+                ?>
               </div>
             </div>
-
+            </div>
             <?php
               $sql = "SELECT * FROM `tasks`";
               $result = mysqli_query($conn, $sql);

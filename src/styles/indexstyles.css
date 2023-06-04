@@ -435,6 +435,18 @@ li.nav-item-dropdown {
   padding-right: 30px;
 }
 
+.week-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.daylist {
+  width: 300px; /* Adjust the width as per your requirements */
+  display: inline-block;
+  margin-right: 60px; /* Adjust the margin as per your requirements */
+}
+
 .daylist .column{
   padding-top: 20px;
   padding-bottom: 20px;

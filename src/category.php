@@ -227,7 +227,7 @@
                       <div class="column">
                         <h3><span class="badge rounded-pill bg-danger">Priority</span></h3>
                         <?php
-                        foreach ($priorityTasks['Priority 3'] as $task) {
+                        foreach ($priorityTasks['Priority 1'] as $task) {
                           echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">
                                   <h5>' . $task['taskname'] . '</h5>
                                   <h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
@@ -247,7 +247,7 @@
                                   </div>
                                 </button>';
                           }
-                        foreach ($priorityTasks['Priority 1'] as $task) {
+                        foreach ($priorityTasks['Priority 3'] as $task) {
                           echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">
                                   <h5>' . $task['taskname'] . '</h5>
                                   <h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>

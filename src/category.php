@@ -14,24 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <link rel="stylesheet" href="styles\indexstyles.css">
-    <script>
-      function updateDate() {
-        var currentDate = new Date();
-      
-        var dayOptions = { weekday: 'long' };
-        var day = currentDate.toLocaleDateString('en-MY', dayOptions);
-
-        var dateOptions = { day: 'numeric', month: 'long' };
-        var date = currentDate.toLocaleDateString('en-MY', dateOptions);
-
-        var dayElement = document.getElementById("day");
-        dayElement.innerHTML = day;
-
-        var dateElement = document.getElementById("date");
-        dateElement.innerHTML = date;
-      }
-      setInterval(updateDate, 10);
-    </script>
 
   </head>
     <div class="wrapper">
@@ -43,19 +25,19 @@
 
           <ul class="list-unstyled components">
               <li>
-                  <a href="index.html">Today</a>
+                  <a href="index.php">Today</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false">Tasks</a>
                   <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li>
-                      <a class="dropdown-item" href="summary.html">Summary</a>
+                      <a class="dropdown-item" href="summary.php">Summary</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="status.html">Status</a>
+                      <a class="dropdown-item" href="status.php">Status</a>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="category.html">Category</a>
+                    <li class="active">
+                      <a class="dropdown-item" href="category.php">Category</a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="progress.html">Progress</a>
@@ -144,14 +126,14 @@
               </header>
               <div class="tab">
                 <div class="btn-box">
-                  <a href="summary.html"><button><i class="fa-regular fa-clipboard fa-xl"></i>Tasks Summary</button></a>
-                  <a href="status.html"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Status</button></a>
-                  <a href="category.html"><button class="active"><i class="fa-regular fa-clipboard fa-xl"></i>By Category</button></a>
+                  <a href="summary.php"><button><i class="fa-regular fa-clipboard fa-xl"></i>Tasks Summary</button></a>
+                  <a href="status.php"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Status</button></a>
+                  <a href="category.php"><button class="active"><i class="fa-regular fa-clipboard fa-xl"></i>By Category</button></a>
                   <a href="progress.html"><button><i class="fa-regular fa-bar-chart fa-xl"></i>View Progress</button></a>
                 </div>
                 <div class="content">
                   <?php
-                  $sql = "SELECT * FROM `tasks`";
+                  $sql = "SELECT * FROM `tasks` ORDER BY `datetime` ASC";
                   $result = mysqli_query($conn, $sql);
 
                   $priorityTasks = [
@@ -221,66 +203,79 @@
                     }
                   }
                   ?>
-
                   <div class="content-left">
                     <div class="board">
-                      <div class="column">
-                        <h3><span class="badge rounded-pill bg-danger">Priority</span></h3>
-                        <?php
-                        foreach ($priorityTasks['Priority 1'] as $task) {
-                          echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">
-                                  <h5>' . $task['taskname'] . '</h5>
-                                  <h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
-                                  <div class="badges">
-                                    <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
-                                    <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
-                                  </div>
-                                </button>';
-                          }
-                        foreach ($priorityTasks['Priority 2'] as $task) {
-                          echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">
-                                  <h5>' . $task['taskname'] . '</h5>
-                                  <h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
-                                  <div class="badges">
-                                    <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
-                                    <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
-                                  </div>
-                                </button>';
-                          }
-                        foreach ($priorityTasks['Priority 3'] as $task) {
-                          echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">
-                                  <h5>' . $task['taskname'] . '</h5>
-                                  <h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
-                                  <div class="badges">
-                                    <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
-                                    <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
-                                  </div>
-                                </button>';
-                          }
-                        ?>
-                        <button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="tasks">
-                          <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
-                          <label class="add mx-3" style="display: inline-block;">Add Task</label>
-                        </button>
-                      </div>
+                        <div class="column">
+                            <h3><span class="badge rounded-pill bg-danger">Priority</span></h3>
+                            <?php
+                            $priorities = ['Priority 1', 'Priority 2', 'Priority 3'];
+                            foreach ($priorities as $priority) {
+                                foreach ($priorityTasks[$priority] as $task) {
+                                    $isCompleted = $task['status'] === 'Completed';
+                                    if (!$isCompleted) {
+                                        echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">';
+                                        echo $isCompleted ? '<h5><s>' : '<h5>';
+                                        echo $task['taskname'] . '</h5>';
+                                        echo '<h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
+                                            <div class="badges">
+                                                <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
+                                                <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
+                                            </div>
+                                        </button>';
+                                    }
+                                }
+                            }
+                            ?>
+                            <?php
+                            foreach ($priorities as $priority) {
+                                foreach ($priorityTasks[$priority] as $task) {
+                                    $isCompleted = $task['status'] === 'Completed';
+                                    if ($isCompleted) {
+                                        echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">';
+                                        echo '<h5><s>'. $task['taskname'] . '</s></h5>';
+                                        echo '<h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
+                                            <div class="badges">
+                                                <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
+                                                <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
+                                            </div>
+                                        </button>';
+                                    }
+                                }
+                            }
+                            ?>
+                            <button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="tasks">
+                                <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
+                                <label class="add mx-3" style="display: inline-block;">Add Task</label>
+                            </button>
+                        </div>
                     </div>
                   </div>
                   <div class="content-right">
                     <div class="board">
-                      <div class="column">
-                        <h3><span class="badge rounded-pill bg-warning">Deadline</span></h3>
-                        <?php
-                        foreach ($deadlineTasks as $task) {
-                          echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">
-                                  <h5>' . $task['taskname'] . '</h5>
-                                  <h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
-                                  <div class="badges">
-                                    <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
-                                    <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
-                                  </div>
-                                </button>';
-                        }
-                        ?>
+                        <div class="column">
+                            <h3><span class="badge rounded-pill bg-warning">Deadline</span></h3>
+                            <?php
+                              usort($deadlineTasks, function($a, $b) {
+                                if ($a['status'] === 'Completed' && $b['status'] !== 'Completed') {
+                                    return 1;
+                                } elseif ($a['status'] !== 'Completed' && $b['status'] === 'Completed') {
+                                    return -1;
+                                } else {
+                                    return 0;
+                                }
+                              });
+                              foreach ($deadlineTasks as $task) {
+                                  $isCompleted = $task['status'] === 'Completed';
+                                  echo '<button type="button" class="weeklist" data-bs-toggle="modal" data-bs-target="#editTask'.$task['id'].'">';
+                                  echo '<h5>'. ($isCompleted ? '<s>'.$task['taskname'].'</s>' : $task['taskname']) . '</h5>';
+                                  echo '<h6 class="prioritydate" style="display: inline-block;">' . $task['date'] . '</h6>
+                                      <div class="badges">
+                                          <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
+                                          <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
+                                      </div>
+                                  </button>';
+                              }
+                            ?>
                         <button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="tasks">
                           <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
                           <label class="add mx-3" style="display: inline-block;">Add Task</label>
@@ -309,12 +304,13 @@
                     <input type="text" id="task-name" name="task-name" value="<?php echo $row['taskname']; ?>" required>
             
                     <label for="due-date">Set Due Date:</label>
-                    <input type="datetime-local" class="date-time" id="date-time" value="<?php echo $row['datetime']; ?>"name="date-time" required>
-            
+                    <input type="datetime-local" class="date-time" id="date-time" value="<?php echo $row['datetime']; ?>"
+                    name="date-time" min="<?php echo date('Y-m-d\TH:i'); ?>"  required>
+
                     <label for="category">Category:</label><br>
                     <select class="form-select" id="category" name="category" required>
                       <option selected value="<?php echo $row['category'];?>"><?php echo $row['category'];?></option>
-                      <option value="">--Select--</option>
+                      <option value="" disabled>--Select--</option>
                       <option value="Priority 1">Priority 1</option>
                       <option value="Priority 2">Priority 2</option>
                       <option value="Priority 3">Priority 3</option>
@@ -324,7 +320,7 @@
                     <label for="status">Status:</label><br>
                     <select class="form-select" id="status" name="status" required>
                       <option selected value="<?php echo $row['status'];?>"><?php echo $row['status'];?></option>
-                      <option value="">--Select--</option>
+                      <option value="" disabled>--Select--</option>
                       <option value="To-Do">To-Do</option>
                       <option value="In Progress">In Progress</option>
                       <option value="Completed">Completed</option>
@@ -358,11 +354,11 @@
                     <input type="text" id="task-name" name="task-name" required>
             
                     <label for="due-date">Set Due Date:</label>
-                    <input type="datetime-local" class="date-time" id="date-time" name="date-time" required>
+                    <input type="datetime-local" class="date-time" id="date-time" name="date-time" min="<?php echo date('Y-m-d\TH:i'); ?>" required>
             
                     <label for="category">Category:</label><br>
                     <select class="form-select" id="category" name="category" required>
-                      <option value="">--Select--</option>
+                      <option value="" disabled selected>--Select--</option>
                       <option value="Priority 1">Priority 1</option>
                       <option value="Priority 2">Priority 2</option>
                       <option value="Priority 3">Priority 3</option>
@@ -371,7 +367,7 @@
             
                     <label for="status">Status:</label><br>
                     <select class="form-select" id="status" name="status" required>
-                      <option value="">--Select--</option>
+                      <option value="" disabled selected>--Select--</option>
                       <option value="To-Do">To-Do</option>
                       <option value="In Progress">In Progress</option>
                       <option value="Completed">Completed</option>

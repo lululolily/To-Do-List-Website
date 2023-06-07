@@ -51,10 +51,10 @@
                       <a class="dropdown-item" href="summary.php">Summary</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="status.html">Status</a>
+                    <a class="dropdown-item" href="status.php">Status</a>
                   </li>
                   <li>
-                      <a class="dropdown-item" href="category.html">Category</a>
+                      <a class="dropdown-item" href="category.php">Category</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="progress.html">Progress</a>
@@ -149,50 +149,79 @@
 
                 <div class="column col-sm">
                 <?php
-                    $sql = "SELECT * FROM `tasks`";
+                    $sql = "SELECT * FROM `tasks` ORDER BY `datetime` ASC";
                     $result = mysqli_query($conn, $sql);
-                    while($row = mysqli_fetch_array($result)){
-
-                            $categoryClass = "";
-                            $statusClass = "";
-                            $dateComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('Y-m-d');
-                            date_default_timezone_set('Asia/Kuala_Lumpur');
-                            $today = date("Y-m-d"); 
-
-                            if ($row['status'] === "To-Do") {
-                              $statusClass = "badge bg-dark";
-                            } else if ($row['status'] === "In Progress") {
-                              $statusClass = "badge bg-secondary";
-                            } else if ($row['status'] === "Completed") {
-                              $statusClass = "badge bg-success";
-                            } 
-                
-                            if ($row['category'] === "Priority 1") {
-                              $categoryClass = "badge bg-danger";
-                            } else if ($row['category'] === "Priority 2") {
-                              $categoryClass = "badge bg-info";
-                            } else if ($row['category'] === "Priority 3") {
-                              $categoryClass = "badge bg-light text-dark";
-                            } else if ($row['category'] === "Deadline") {
-                              $categoryClass = "badge bg-warning";
-                            }
-
-                            if($dateComponent === $today){
-                            echo '<div class="task d-flex flex-column">
-                              <div class="d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">'.$row['taskname'].'</label>
-                              </div>
-                              <div>
-                                <p class="'.$categoryClass.'">'.$row['category'].'</p>
-                                <p class="'.$statusClass.'">'.$row['status'].'</p>
-                              </div>
-                              <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editTask'.$row['id'].'">
-                                <i class="fa-solid fa-pen fa-sm"></i>
-                              </button>
-                            </div>';
-                          }
+                    $tasks = array();
+                    
+                    while ($row = mysqli_fetch_array($result)) {
+                        $categoryClass = "";
+                        $statusClass = "";
+                        $dateComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('Y-m-d');
+                        $dayComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('D, j M, g:i a');
+                        date_default_timezone_set('Asia/Kuala_Lumpur');
+                        $today = date("Y-m-d"); 
+                    
+                        if ($row['status'] === "To-Do") {
+                            $statusClass = "badge bg-dark";
+                        } else if ($row['status'] === "In Progress") {
+                            $statusClass = "badge bg-secondary";
+                        } else if ($row['status'] === "Completed") {
+                            $statusClass = "badge bg-success";
+                        } 
+                    
+                        if ($row['category'] === "Priority 1") {
+                            $categoryClass = "badge bg-danger";
+                        } else if ($row['category'] === "Priority 2") {
+                            $categoryClass = "badge bg-info";
+                        } else if ($row['category'] === "Priority 3") {
+                            $categoryClass = "badge bg-light text-dark";
+                        } else if ($row['category'] === "Deadline") {
+                            $categoryClass = "badge bg-warning";
                         }
+                    
+                        if ($dateComponent === $today) {
+                            $task = array(
+                                'taskname' => $row['taskname'],
+                                'dayComponent' => $dayComponent,
+                                'categoryClass' => $categoryClass,
+                                'statusClass' => $statusClass,
+                                'category' => $row['category'],
+                                'status' => $row['status'],
+                                'id' => $row['id']
+                            );
+                            $tasks[] = $task;
+                        }
+                    }
+                    
+                    // Sort tasks based on completion status (non-completed tasks above completed tasks)
+                    usort($tasks, function($a, $b) {
+                        if ($a['status'] === 'Completed' && $b['status'] !== 'Completed') {
+                            return 1;
+                        } else if ($a['status'] !== 'Completed' && $b['status'] === 'Completed') {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                    
+                    // Display the sorted tasks
+                    foreach ($tasks as $task) {
+                        echo '<div class="task d-flex flex-column">';
+                        if ($task['status'] === 'Completed') {
+                            echo '<h5><s>' . $task['taskname'] . '</s></h5>';
+                        } else {
+                            echo '<h5>' . $task['taskname'] . '</h5>';
+                        }
+                        echo '<h6 class="prioritydate">' . $task['dayComponent'] . '</h6>
+                                  <div>
+                                    <p class="' . $task['categoryClass'] . '">' . $task['category'] . '</p>
+                                    <p class="' . $task['statusClass'] . '">' . $task['status'] . '</p>
+                                  </div>
+                                  <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editTask' . $task['id'] . '">
+                                    <i class="fa-solid fa-pen fa-sm"></i>
+                                  </button>
+                              </div>';
+                    }
+                    
                   ?>
                   <button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="add-task">
                       <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>
@@ -220,12 +249,13 @@
                     <input type="text" id="task-name" name="task-name" value="<?php echo $row['taskname']; ?>" required>
             
                     <label for="due-date">Set Due Date:</label>
-                    <input type="datetime-local" class="date-time" id="date-time" value="<?php echo $row['datetime']; ?>"name="date-time" required>
+                    <input type="datetime-local" class="date-time" id="date-time" value="<?php echo $row['datetime']; ?>"
+                    name="date-time" min="<?php echo date('Y-m-d\TH:i'); ?>"  required>
             
                     <label for="category">Category:</label><br>
                     <select class="form-select" id="category" name="category" required>
                       <option selected value="<?php echo $row['category'];?>"><?php echo $row['category'];?></option>
-                      <option value="">--Select--</option>
+                      <option value="" disabled>--Select--</option>
                       <option value="Priority 1">Priority 1</option>
                       <option value="Priority 2">Priority 2</option>
                       <option value="Priority 3">Priority 3</option>
@@ -235,7 +265,7 @@
                     <label for="status">Status:</label><br>
                     <select class="form-select" id="status" name="status" required>
                       <option selected value="<?php echo $row['status'];?>"><?php echo $row['status'];?></option>
-                      <option value="">--Select--</option>
+                      <option value="" disabled>--Select--</option>
                       <option value="To-Do">To-Do</option>
                       <option value="In Progress">In Progress</option>
                       <option value="Completed">Completed</option>
@@ -269,11 +299,11 @@
                     <input type="text" id="task-name" name="task-name" required>
             
                     <label for="due-date">Set Due Date:</label>
-                    <input type="datetime-local" class="date-time" id="date-time" name="date-time" required>
-            
+                    <input type="datetime-local" class="date-time" id="date-time" name="date-time" min="<?php echo date('Y-m-d\TH:i'); ?>" required>
+
                     <label for="category">Category:</label><br>
                     <select class="form-select" id="category" name="category" required>
-                      <option value="">--Select--</option>
+                      <option value="" disabled selected>--Select--</option>
                       <option value="Priority 1">Priority 1</option>
                       <option value="Priority 2">Priority 2</option>
                       <option value="Priority 3">Priority 3</option>
@@ -282,7 +312,7 @@
             
                     <label for="status">Status:</label><br>
                     <select class="form-select" id="status" name="status" required>
-                      <option value="">--Select--</option>
+                      <option value="" disabled selected>--Select--</option>
                       <option value="To-Do">To-Do</option>
                       <option value="In Progress">In Progress</option>
                       <option value="Completed">Completed</option>

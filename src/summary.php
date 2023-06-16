@@ -138,7 +138,7 @@
                       </span>
                       <div class="dropdown-content-profile">
                         <a href="profile.php">Manage Profile</a>
-                        <a href="logout.html">Logout</a>
+                        <a href="php/logout.php">Logout</a>
                       </div>
                     </button>
                     

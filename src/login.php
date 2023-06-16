@@ -28,7 +28,11 @@
                     $_SESSION['username'] = $row['username'];
                     // $_SESSION['age'] = $row['Age'];
                     $_SESSION['id'] = $row['id'];
-                    header("Location: index.php");
+                    echo "<div class='message'>
+                      <p>Welcome to minni to do list</p>
+                       </div> <br>";
+                   echo "<a href='index.php'><button class='btn'>continue</button>";
+                    // header("Location: index.php");
                     exit;
                 }else{
                     echo "<div class='message'>
@@ -38,6 +42,7 @@
          
                 }
                 if(isset($_SESSION['valid'])){
+                    
                     header("Location: profile.php");
                 }
               }else{
@@ -69,4 +74,4 @@
       </div>
 </body>
 </html>
-?>
+

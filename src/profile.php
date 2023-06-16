@@ -51,7 +51,7 @@
                 </ul>
             </li>
             <li class="active">
-              <a href="profile.html">Settings</a>
+              <a href="profile.php">Settings</a>
             </li>
             <li>
               <a href="about.html">About Us</a>
@@ -119,8 +119,8 @@
                         </span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="profile.html">Manage Profile</a></li>
-                        <li><a class="dropdown-item" href="logout.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="profile.php">Manage Profile</a></li>
+                        <li><a class="dropdown-item" href="php/logout.php">Logout</a></li>
                       </ul>
                     </li>
                   </button>

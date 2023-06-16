@@ -1,24 +1,34 @@
 <?php
-$server_name="localhost";
-$username="root";
-$password="";
-$database_name="database1";
 
-$conn = mysqli_connect($server_name, $username, $password, $database_name);
-if(!$conn)
-{
-    die("Connection Failed:" . mysqli_connect_error());
+$server_name = "localhost";
+$username = "root";
+$password = "";
+$database_name = "database1";
+
+include("php/config.php");
+session_start();
+
+  // Check if the user is logged in (optional)
+  if (!isset($_SESSION['valid'])) {
+    // Redirect the user to the login page or handle the unauthorized access
+    header("Location: login.php");
+    exit; // Make sure to exit after redirection
+}
+if (!$conn) {
+    die("Connection Failed: " . mysqli_connect_error());
 }
 
-if(isset($_POST['add']))
-{
+if (isset($_SESSION['id'])) {
     $taskname = $_POST['task-name'];
     $datetime = $_POST['date-time'];
     $category = $_POST['category'];
     $status = $_POST['status'];
-    
-    $sql_query = "INSERT INTO tasks (taskname,datetime,category,status)
-    VALUES ('$taskname','$datetime','$category','$status')";
+
+    $user_id = $_SESSION['id'];
+
+    $sql_query = "INSERT INTO tasks (taskname, datetime, category, status, user_id)
+    VALUES ('$taskname', '$datetime', '$category', '$status', '$user_id')";
+
     if (mysqli_query($conn, $sql_query)) {
         $redirect_url = '';
 
@@ -39,8 +49,9 @@ if(isset($_POST['add']))
             exit;
         }
     } else {
-        echo "Error: " . $sql . "" . mysqli_error($conn);
+        echo "Error: " . $sql_query . "" . mysqli_error($conn);
     }
+
     mysqli_close($conn);
 }
 ?>

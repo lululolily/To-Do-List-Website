@@ -4,14 +4,23 @@ $username="root";
 $password="";
 $database_name="database1";
 
-$conn = mysqli_connect($server_name, $username, $password, $database_name);
+include("php/config.php");
+session_start();
+
+  // Check if the user is logged in (optional)
+  if (!isset($_SESSION['valid'])) {
+    // Redirect the user to the login page or handle the unauthorized access
+    header("Location: login.php");
+    exit; // Make sure to exit after redirection
+}
 if(!$conn)
 {
     die("Connection Failed:" . mysqli_connect_error());
 }
 
-if(isset($_POST['delete'])) {
+if (isset($_SESSION['id'])) {
     $id = $_POST['id'];
+    $user_id = $_SESSION['id'];
     
     $sql_query = "DELETE FROM tasks WHERE id='$id'";
     

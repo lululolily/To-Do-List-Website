@@ -1,5 +1,13 @@
 <?php
-  $conn = mysqli_connect("localhost", "root", "", "database1");
+  include("php/config.php");
+  session_start();
+
+  // Check if the user is logged in (optional)
+  if (!isset($_SESSION['valid'])) {
+    // Redirect the user to the login page or handle the unauthorized access
+    header("Location: login.php");
+    exit; // Make sure to exit after redirection
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,7 +70,7 @@
               </ul>
           </li>
           <li>
-            <a href="profile.html">Settings</a>
+            <a href="profile.php">Settings</a>
           </li>
           <li>
               <a href="about.html">About Us</a>
@@ -127,7 +135,7 @@
                         <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
                       </span>
                       <div class="dropdown-content-profile">
-                        <a href="profile.html">Manage Profile</a>
+                        <a href="profile.php">Manage Profile</a>
                         <a href="logout.html">Logout</a>
                       </div>
                     </button>
@@ -149,9 +157,11 @@
 
                 <div class="column col-sm">
                 <?php
-                    $sql = "SELECT * FROM `tasks` ORDER BY `datetime` ASC";
+                if (isset($_SESSION['id'])) {
+                    $user_id = $_SESSION['id'];
+                    $sql = "SELECT * FROM `tasks` WHERE `user_id` = '".$_SESSION['id']."' ORDER BY `datetime` ASC";
                     $result = mysqli_query($conn, $sql);
-                    $tasks = array();
+                    $tasks = array();                    
                     
                     while ($row = mysqli_fetch_array($result)) {
                         $categoryClass = "";
@@ -220,7 +230,10 @@
                                     <i class="fa-solid fa-pen fa-sm"></i>
                                   </button>
                               </div>';
-                    }
+                    }} else {
+                      // Handle the case when the user ID is not available in the session
+                      echo "<h1>User ID not found in the session.</h1>";
+                  }
                     
                   ?>
                   <button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="add-task">

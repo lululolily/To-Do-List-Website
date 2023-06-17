@@ -156,11 +156,8 @@
             while($result = mysqli_fetch_assoc($query)){
                 $res_Uname = $result['username'];
                 $res_Email = $result['email'];
-                // $res_Age = $result['Age'];
                 $res_id = $result['id'];
             }
-            
-            echo "<a href='edit.php?Id=$res_id'>Change Profile</a>";
 
             // Update username if form is submitted
           if(isset($_POST['update_username'])){
@@ -207,7 +204,60 @@
             echo "Error updating username: " . mysqli_error($conn);
           }
         }
-            ?>
+
+
+        if (isset($_POST['update_password'])) {
+          $currentPassword = mysqli_real_escape_string($conn, $_POST['current_password']);
+          $newPassword = mysqli_real_escape_string($conn, $_POST['new_password']);
+          $confirmPassword = mysqli_real_escape_string($conn, $_POST['confirm_password']);
+          $id = $_SESSION['id'];
+      
+          // Retrieve current password from the database
+          $retrievePasswordQuery = "SELECT password FROM entry_details WHERE id='$id'";
+          $result = mysqli_query($conn, $retrievePasswordQuery);
+          if ($row = mysqli_fetch_assoc($result)) {
+              $currentPasswordFromDB = $row['password'];
+      
+              // Verify current password
+              if ($currentPassword !== $currentPasswordFromDB) {
+                  echo "<script>alert('Incorrect current password. Please try again.');
+                  window.location.href = 'profile.php';
+                  </script>";
+                  exit;
+              }
+          }
+      
+          // Password Length Validation
+          if (strlen($newPassword) < 8) {
+              echo "<script>alert('New password should be at least 8 characters long.');
+              window.location.href = 'profile.php';
+              </script>";
+              exit;
+          }
+      
+          // Password and Confirm Password Matching Validation
+          if ($newPassword !== $confirmPassword) {
+              echo "<script>alert('New password and confirm password do not match.');
+              window.location.href = 'profile.php';
+              </script>";
+              exit;
+          }
+      
+          // Update the password in the database
+          $updatePasswordQuery = "UPDATE entry_details SET password='$newPassword' WHERE id='$id'";
+          if (mysqli_query($conn, $updatePasswordQuery)) {
+              $_SESSION['password'] = $newPassword;
+              echo "<script>
+                      alert('Password reset successful');
+                      window.location.href = 'profile.php';
+                    </script>";
+              exit;
+          } else {
+              echo "Error updating password: " . mysqli_error($conn);
+          }
+      }
+      ?>
+   
               </header>
               <div class="contents">
                 <div class="row">
@@ -236,6 +286,10 @@
 
                       <p style="display: inline-block;"><b><?php echo $res_Email ?></b></p>
                     </div>  
+
+                    <div class="input-manage">
+                      <button class="submit3" onclick="openPasswordPopup()" type="button">Reset Password</button>
+                    </div>
                   
                     <div class="input-manage">
                       <button class="submit3" onclick="confirmLogout()">Logout</button>
@@ -273,7 +327,7 @@
                   <label class=label for="ChangeEmail">Enter Password</label>
                   <input type="text" class="input" id="ChangeEmail" required>
                   <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
-                  <button type="submit" class="submit5">Save</button>
+                  <button type="submit" class="submit5">Confirm</button>
                 </form>
               </div>
             </div>
@@ -283,16 +337,32 @@
           <h2>Change Username</h2>
         </div>
         <form class="dialog" method="POST">
-  <label class="label" for="ChangeUsername">New Username</label>
-  <input type="text" class="input" id="ChangeUsername" name="new_username" required>
-  <button type="button" onclick="closeUsernamePopup()" class="submit5">Cancel</button>
-  <button type="submit" class="submit5">Save</button>
-</form>
-
+            <label class="label" for="ChangeUsername">New Username</label>
+            <input type="text" class="input" id="ChangeUsername" name="new_username" required>
+            <button type="button" onclick="closeUsernamePopup()" class="submit5">Cancel</button>
+            <button type="submit" class="submit5">Save</button>
+        </form>
       </div>
     </div>
         </div>
+
+        <div class="overlaypass">
+    <div class="popup" id="password-popup">
+        <div class="popup-header">
+            <h2>Change Password</h2>
+        </div>
+        <form class="dialog" method="POST">
+            <label class="label" for="CurrentPassword">Current Password</label>
+            <input type="password" class="input" id="CurrentPassword" name="current_password" required>
+            <label class="label" for="NewPassword">New Password</label>
+            <input type="password" class="input" id="NewPassword" name="new_password" required>
+            <label class="label" for="ConfirmPassword">Confirm Password</label>
+            <input type="password" class="input" id="ConfirmPassword" name="confirm_password" required>
+            <button type="button" onclick="closePasswordPopup()" class="submit5">Cancel</button>
+            <button type="submit" name="update_password" class="submit5">Save</button>
+        </form>
     </div>
+</div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

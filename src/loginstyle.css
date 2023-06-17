@@ -37,20 +37,18 @@ img{
     top: 30px;
     left: 30px;
 }
-.text{
+.text p{
     position: absolute;
     top: 80%;
-    left: 50%;
+    left: 42%;
     transform: translate(-50%, -50%);
-}
-.text p{
+    text-align: right;
     color: #fff;
     font-size: 18px;
 }
 i{
     font-weight: 400;
     font-size: 20px;
-    left: 10px;
 }
 .right{
     display: flex;
@@ -66,37 +64,41 @@ i{
 .input-box header{
     font-weight: 700;
     text-align: center;
-    margin-bottom: 45px;
+    margin-bottom: 25px;
+    margin-top: 35px;
 }
 .input-field{
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     position: relative;
+    align-items: center;
     padding: 0 20px 0 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .input{
-    height: 40px;
-    width: 100%;
+    height: 40px; 
+    width: 300px;
     background: rgba(113, 174, 120, 0.12);
     border: none;
-    padding: 20px;
-    margin-bottom: 10px;
-    /* border-bottom: 1px solid rgba(0,0,0,0.2); */
+    border-bottom: 1px solid rgba(0,0,0,0.2); 
     outline: none;
+    padding: 20px;
     border-radius: 25px;
+    margin-bottom: 10px;
     color: #40414a;
 }
 .input-box .input-field label{
     position: absolute;
     top: 10px;
-    left: 35px;
+    left: 20px;
     pointer-events: none;
     transition: .5s;
 }
 .input-field .input:focus ~ label{
     top: -10px;
     font-size: 13px;
-
 }
 .input-field .input:valid ~ label{
     top: -10px;
@@ -110,9 +112,11 @@ i{
 .submit{
     border: none;
     outline: none;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     height: 35px;
-    width: 290px;
+    width: 245px;
     background: #D66161;
     border-radius: 25px;
     transition: .4s;
@@ -124,48 +128,15 @@ i{
     color: #fff;
 }
 
-.google{
-    border: none;
-    outline: none;
-    margin-bottom: 20px;
-    height: 35px;
-    background: #FFB800;
-    border-radius: 25px;
-    transition: .4s;
-    
-}
-.google:hover{
-    background: #0094FF;
-    color: #fff;
-}
-
-.facebook{
-    border: none;
-    outline: none;
-    height: 35px;
-    background: #FFB800;
-    border-radius: 25px;
-    transition: 0.4s;
-    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.2);
-}
-.facebook:hover{
-    background:#0094FF;
-    color: #fff;
-}
-.signup{
+.links{
     text-align: center;
-    font-size: smaller;
+    font-size: 16px;
     margin-bottom: 30px;
     margin-top: 10px;
 }
 
-.Forgot{
-    text-align: right;
-    font-size: smaller;
-    margin-bottom: 20px;
-    color: #0094FF;
-}
 span a{
+    font-size: 16px;
     text-decoration: none;
     font-weight: 700;
     color: #0094FF;
@@ -198,3 +169,4 @@ span a:hover{
         width: 100%;
     }
 }
+

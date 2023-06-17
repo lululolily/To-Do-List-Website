@@ -256,6 +256,39 @@
               echo "Error updating password: " . mysqli_error($conn);
           }
       }
+
+      if (isset($_POST['confirm'])) {
+        $Password = mysqli_real_escape_string($conn, $_POST['password']);
+        $id = $_SESSION['id'];
+
+        $retrievePasswordQuery = "SELECT password FROM entry_details WHERE id='$id'";
+        $result = mysqli_query($conn, $retrievePasswordQuery);
+        if ($row = mysqli_fetch_assoc($result)) {
+            $currentPasswordFromDB = $row['password'];
+
+            if ($Password !== $currentPasswordFromDB) {
+                echo "<script>alert('Incorrect password. Please try again.');
+                window.location.href = 'profile.php';
+                </script>";
+                exit;
+            }
+        }
+
+        $deleteQuery = "DELETE FROM entry_details WHERE id = '$id'";
+          if (mysqli_query($conn, $deleteQuery)) {
+              $_SESSION['password'] = $Password;
+              session_unset(); 
+              session_destroy();
+              echo "<script>
+                      alert('Account deleted successfully!');
+                      window.location.href = 'login.php';
+                    </script>";
+              exit;
+          } else {
+              echo "Account deletion failed. Please try again. " . mysqli_error($conn);
+          }
+      }
+
       ?>
    
               </header>
@@ -306,12 +339,9 @@
                       }
                     </script>
 
-                  <div class="input-field">
-              
-                    <button onclick="openEmailPopup()" type="button" class="submit4">Delete Account</button>
-
-
-                  </div>
+<div class="input-field">
+  <button onclick="openEmailPopup()" type="button" class="submit4">Delete Account</button>
+</div>
                   
                   </div> 
                 </div>
@@ -319,18 +349,18 @@
             </div>
 
             <div class="overlaymail">
-              <div class="popup" id="email-popup">
-                <div class="popup-header">
-                  <h2>Delete Account</h2>
-                </div>
-                <form class="dialog">
-                  <label class=label for="ChangeEmail">Enter Password</label>
-                  <input type="text" class="input" id="ChangeEmail" required>
-                  <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
-                  <button type="submit" class="submit5">Confirm</button>
-                </form>
-              </div>
-            </div>
+  <div class="popup" id="email-popup">
+    <div class="popup-header">
+      <h2>Delete Account</h2>
+    </div>
+    <form class="dialog" method="POST" >
+      <label class="label" for="Password">Enter Password</label>
+      <input type="password" class="input" id="Password" name="password" required>
+      <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
+      <button type="submit" name="confirm" class="submit5">Confirm</button>
+    </form>
+  </div>
+</div>
             <div class="overlay-name">
       <div class="popup" id="username-popup" >
         <div class="popup-header">

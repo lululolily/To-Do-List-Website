@@ -192,6 +192,15 @@ ul.CTAs a {
     padding-bottom: 10px;
 }
 
+.btn{
+  padding-top: 12px;
+}
+
+.btn:hover{
+  color: rgba(255, 166, 0, 0.5);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+} 
+
 .btn li {
     list-style: none;
   }
@@ -354,6 +363,13 @@ a[aria-expanded="true"] {
     color: #fff;
 }
 
+.modal-dialog {
+  width: 400px;
+  top: 20%;
+  min-height: unset !important;
+  background-color: white;
+  border-radius: 15px;
+}
 
 .popup {
     position: fixed;
@@ -435,7 +451,6 @@ a[aria-expanded="true"] {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    background: #D3D3D3;
     border: 1px solid #000;
   }
 

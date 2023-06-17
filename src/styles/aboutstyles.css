@@ -226,6 +226,15 @@ ul.CTAs a {
     border-radius: 20px;
 }
 
+.modal-dialog {
+  width: 400px;
+  top: 20%;
+  min-height: unset !important;
+  background-color: white;
+  border-radius: 15px;
+}
+
+
 .popup {
     position: fixed;
     top: 0;

@@ -16,9 +16,8 @@
     <title>Minni To-Do List</title>
     <link rel="shortcut icon" type="image/png" href="assets/icon.png">
     <!-- Link to Bootstrap stylesheet -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <link rel="stylesheet" href="styles\profilestyles.css"> 
@@ -84,10 +83,10 @@
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   </ul>
                 </ul>
-                <button onclick="openPopup()" type="button" class="btn">
-                  <span class="navbar-text">
-                    <i class="fa-regular fa-plus fa-xl" style="color: orange;"></i>
-                  </span>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalPopup">
+                    <span class="navbar-text">
+                      <i class="fa-regular fa-plus fa-xl" style="color: orange;"></i>
+                    </span>
                 </button>
                 <div class="dropdown">
                   <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -348,61 +347,61 @@
                         }
                       }
                     </script>
-
-<div class="input-field">
-  <button onclick="openEmailPopup()" type="button" class="submit4">Delete Account</button>
-</div>
-                  
+                    <div class="input-field">
+                      <button onclick="openEmailPopup()" type="button" class="submit4">Delete Account</button>
+                    </div>
                   </div> 
                 </div>
               </div>
             </div>
 
             <div class="overlaymail">
-  <div class="popup" id="email-popup">
-    <div class="popup-header">
-      <h2>Delete Account</h2>
-    </div>
-    <form class="dialog" method="POST" >
-      <label class="label" for="Password">Enter Password</label>
-      <input type="password" class="input" id="Password" name="password" required>
-      <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
-      <button type="submit" name="confirm" class="submit5">Confirm</button>
-    </form>
-  </div>
-</div>
+              <div class="popup" id="email-popup">
+                <div class="popup-header">
+                  <h2>Delete Account</h2>
+                </div>
+                <form class="dialog" method="POST" >
+                  <label class="label" for="Password">Enter Password</label>
+                  <input type="password" class="input" id="Password" name="password" required>
+                  <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
+                  <button type="submit" name="confirm" class="submit5">Confirm</button>
+                </form>
+              </div>
+            </div>
             <div class="overlay-name">
-      <div class="popup" id="username-popup" >
-        <div class="popup-header">
-          <h2>Change Username</h2>
+              <div class="popup" id="username-popup" >
+                <div class="popup-header">
+                  <h2>Change Username</h2>
+                </div>
+                <form class="dialog" method="POST">
+                    <label class="label" for="ChangeUsername">New Username</label>
+                    <input type="text" class="input" id="ChangeUsername" name="new_username" required>
+                    <button type="button" onclick="closeUsernamePopup()" class="submit5">Cancel</button>
+                    <button type="submit" class="submit5">Save</button>
+                </form>
+              </div>
+            </div>
         </div>
-        <form class="dialog" method="POST">
-            <label class="label" for="ChangeUsername">New Username</label>
-            <input type="text" class="input" id="ChangeUsername" name="new_username" required>
-            <button type="button" onclick="closeUsernamePopup()" class="submit5">Cancel</button>
-            <button type="submit" class="submit5">Save</button>
-        </form>
-      </div>
-    </div>
-        </div>
-
         <div class="overlaypass">
-    <div class="popup" id="password-popup">
-        <div class="popup-header">
-            <h2>Change Password</h2>
+          <div class="popup" id="password-popup">
+              <div class="popup-header">
+                  <h2>Change Password</h2>
+              </div>
+              <form class="dialog" method="POST">
+                  <label class="label" for="CurrentPassword">Current Password</label>
+                  <input type="password" class="input" id="CurrentPassword" name="current_password" required>
+                  <label class="label" for="NewPassword">New Password</label>
+                  <input type="password" class="input" id="NewPassword" name="new_password" required>
+                  <label class="label" for="ConfirmPassword">Confirm Password</label>
+                  <input type="password" class="input" id="ConfirmPassword" name="confirm_password" required>
+                  <button type="button" onclick="closePasswordPopup()" class="submit5">Cancel</button>
+                  <button type="submit" name="update_password" class="submit5">Save</button>
+              </form>
+          </div>
         </div>
-        <form class="dialog" method="POST">
-            <label class="label" for="CurrentPassword">Current Password</label>
-            <input type="password" class="input" id="CurrentPassword" name="current_password" required>
-            <label class="label" for="NewPassword">New Password</label>
-            <input type="password" class="input" id="NewPassword" name="new_password" required>
-            <label class="label" for="ConfirmPassword">Confirm Password</label>
-            <input type="password" class="input" id="ConfirmPassword" name="confirm_password" required>
-            <button type="button" onclick="closePasswordPopup()" class="submit5">Cancel</button>
-            <button type="submit" name="update_password" class="submit5">Save</button>
-        </form>
-    </div>
-</div>
+        <?php
+          include("php/addTask.php");
+        ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

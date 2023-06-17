@@ -40,6 +40,10 @@ if (isset($_SESSION['id'])) {
             $redirect_url = 'category.php';
         } elseif (strpos($_SERVER['HTTP_REFERER'], 'status.php') !== false) {
             $redirect_url = 'status.php';
+        } elseif (strpos($_SERVER['HTTP_REFERER'], 'about.php') !== false) {
+            $redirect_url = 'about.php';
+        } elseif (strpos($_SERVER['HTTP_REFERER'], 'profile.php') !== false) {
+            $redirect_url = 'profile.php';
         } elseif (strpos($_SERVER['HTTP_REFERER'], '') !== false) {
             $redirect_url = 'index.php';
         }

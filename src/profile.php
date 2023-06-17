@@ -274,20 +274,30 @@
             }
         }
 
-        $deleteQuery = "DELETE FROM entry_details WHERE id = '$id'";
-          if (mysqli_query($conn, $deleteQuery)) {
-              $_SESSION['password'] = $Password;
-              session_unset(); 
-              session_destroy();
-              echo "<script>
-                      alert('Account deleted successfully!');
-                      window.location.href = 'login.php';
-                    </script>";
-              exit;
-          } else {
-              echo "Account deletion failed. Please try again. " . mysqli_error($conn);
-          }
-      }
+        $userId = $_SESSION['id'];
+
+        // Delete associated tasks
+        $deleteTasksQuery = "DELETE FROM tasks WHERE `user_id` = '$userId'";
+        if (!mysqli_query($conn, $deleteTasksQuery)) {
+            echo "Error deleting associated tasks: " . mysqli_error($conn);
+            exit;
+        }
+        
+        // Delete entry_details
+        $deleteQuery = "DELETE FROM entry_details WHERE `id` = '$userId'";
+        if (mysqli_query($conn, $deleteQuery)) {
+            $_SESSION['password'] = $Password;
+            session_unset();
+            session_destroy();
+            echo "<script>
+                    alert('Account deleted successfully!');
+                    window.location.href = 'login.php';
+                  </script>";
+            exit;
+        } else {
+            echo "Account deletion failed. Please try again. " . mysqli_error($conn);
+        }
+      }        
 
       ?>
    
@@ -394,11 +404,8 @@
     </div>
 </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script type="text/javascript" src="scripts/profile.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

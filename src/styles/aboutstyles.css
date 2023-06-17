@@ -46,6 +46,7 @@ a:focus {
     transition: all 0.3s;
 }
 
+
 .navbar {
     padding: 5px 5px;
     background: #fff;
@@ -61,7 +62,13 @@ a:focus {
     outline: none !important;
     border: none;
 }
-
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: orange; */
+  padding: 20px;
+}
 .line {
     width: 100%;
     height: 1px;

@@ -56,7 +56,7 @@
               <a href="profile.php">Settings</a>
             </li>
             <li>
-              <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
             </li>
         </ul>
       </nav>
@@ -122,7 +122,20 @@
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="profile.php">Manage Profile</a></li>
-                        <li><a class="dropdown-item" href="php/logout.php">Logout</a></li>
+                        <li>
+                          <a class="dropdown-item" href="#" onclick="confirmLogout()">Logout</a>
+                        </li>
+
+                        <script>
+                          function confirmLogout() {
+                            var confirmLogout = confirm("Are you sure you want to log out?");
+                            if (confirmLogout) {
+                              window.location.href = "php/logout.php";
+                            } else {
+                              // User cancelled logout, do nothing or perform any other action
+                            }
+                          }
+                        </script>
                       </ul>
                     </li>
                   </button>
@@ -223,9 +236,21 @@
                       <p style="display: inline-block;"><b><?php echo $res_Email ?></b></p>
                     </div>  
                   
-                  <div class="input-manage">
-                    <a href="php/logout.php"><button class="submit3">Logout</button></a>
-                  </div>
+                    <div class="input-manage">
+                      <button class="submit3" onclick="confirmLogout()">Logout</button>
+                    </div>
+
+                    <script>
+                      function confirmLogout() {
+                        var confirmLogout = confirm("Are you sure you want to log out?");
+                        if (confirmLogout) {
+                          window.location.href = "php/logout.php";
+                        } else {
+                          // User cancelled logout, do nothing or perform any other action
+                        }
+                      }
+                    </script>
+
                   <div class="input-field">
               
                     <button onclick="openEmailPopup()" type="button" class="submit4">Delete Account</button>

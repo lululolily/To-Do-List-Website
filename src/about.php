@@ -1,3 +1,14 @@
+<?php
+  include("php/config.php");
+  session_start();
+
+  // Check if the user is logged in (optional)
+  if (!isset($_SESSION['valid'])) {
+    // Redirect the user to the login page or handle the unauthorized access
+    header("Location: login.php");
+    exit; // Make sure to exit after redirection
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -110,7 +121,18 @@
                     </button>
                     <div class="dropdown-content-profile">
                       <a href="profile.php">Manage Profile</a>
-                      <a href="php/logout.php">Logout</a>
+                      <a href="#" onclick="confirmLogout()">Logout</a>
+
+                        <script>
+                          function confirmLogout() {
+                            var confirmLogout = confirm("Are you sure you want to log out?");
+                            if (confirmLogout) {
+                              window.location.href = "php/logout.php";
+                            } else {
+                              // User cancelled logout, do nothing or perform any other action
+                            }
+                          }
+                        </script>
                     </div>
                   </div>
               </div>
@@ -137,10 +159,16 @@
                         <div style="text-align: center;">
                             <img src="assets/tips.png" alt="todolist"  width="350" height="350"  >
                         </div>
-                        <div class="text" >
-                            <p style="font-size: 14px; text-align: center;">This website is built by Emilia, Amirul, Alia, Izzureen and Amsyar<i></i>
-                            <p style="font-size: 14px; text-align: center;">Contact Us: u2102845@siswa.um.edu.my<i></i></p>
-                            </div>
+                      
+                        <div>
+                        <footer>
+                          <p>&copy; 2023 Minni Studio. All rights reserved.</p>
+                          <p>Contact: <a href="mailto:your-email@example.com">minnistudio@um.com</a></p>
+                        </footer>
+                        </div>
+                        
+                        
+                        
                   </div>
                 </div>
               </div>

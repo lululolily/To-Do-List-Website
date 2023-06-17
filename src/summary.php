@@ -75,7 +75,7 @@
               <a href="profile.php">Settings</a>
             </li>
             <li>
-              <a href="about.html">About Us</a>
+            <a href="about.php">About Us</a>
             </li>
         </ul>
       </nav>
@@ -138,7 +138,18 @@
                       </span>
                       <div class="dropdown-content-profile">
                         <a href="profile.php">Manage Profile</a>
-                        <a href="php/logout.php">Logout</a>
+                        <a href="#" onclick="confirmLogout()">Logout</a>
+
+                      <script>
+                        function confirmLogout() {
+                          var confirmLogout = confirm("Are you sure you want to log out?");
+                          if (confirmLogout) {
+                            window.location.href = "php/logout.php";
+                          } else {
+                            // User cancelled logout, do nothing or perform any other action
+                          }
+                        }
+                      </script>
                       </div>
                     </button>
                     

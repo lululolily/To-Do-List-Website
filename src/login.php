@@ -1,5 +1,11 @@
 <?php 
    session_start();
+
+   if (isset($_SESSION['valid'])) {
+    // User is already logged in, redirect to index.php
+    header("Location: index.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +34,14 @@
                     $_SESSION['username'] = $row['username'];
                     // $_SESSION['age'] = $row['Age'];
                     $_SESSION['id'] = $row['id'];
-                    echo "<div class='message'>
-                      <p>Welcome to minni to do list</p>
-                       </div> <br>";
-                   echo "<a href='index.php'><button class='btn'>continue</button>";
+                    echo "<script>
+                        alert('Successful login! Click OK to continue');
+                        window.location.href = 'index.php';
+                    </script>";
+                //     echo "<div class='message'>
+                //       <p>Welcome to minni to do list</p>
+                //        </div> <br>";
+                //    echo "<a href='index.php'><button class='btn'>continue</button>";
                     // header("Location: index.php");
                     exit;
                 }else{
@@ -69,9 +79,11 @@
                     Don't have account? <a href="register.php">Sign Up Now</a>
                 </div>
             </form>
+            <script  src = "script.js"></script>
         </div>
         <?php } ?>
       </div>
+      
 </body>
 </html>
 

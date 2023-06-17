@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
     <title>Register</title>
+    <script src="scripts/script.js"></script>
 </head>
 <body>
       <div class="container">
@@ -17,16 +18,23 @@
          if(isset($_POST['submit'])){
             $username = $_POST['username'];
             $email = $_POST['email'];
-            //$age = $_POST['age'];
+            // $age = $_POST['age'];
             $password = $_POST['password'];
 
          //verifying the unique email
 
-         $verify_query = mysqli_query($conn,"SELECT email FROM entry_details WHERE `email`");
+         $verify_query = mysqli_query($conn,"SELECT email FROM entry_details WHERE email='$email'");
+         $verify_username = mysqli_query($conn,"SELECT username FROM entry_details WHERE username='$username'");
 
          if(mysqli_num_rows($verify_query) !=0 ){
             echo "<div class='message'>
                       <p>This email is used, Try another One Please!</p>
+                  </div> <br>";
+            echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
+         }
+         else if(mysqli_num_rows($verify_username) !=0 ){
+            echo "<div class='message'>
+                      <p>This username is used, Try another One Please!</p>
                   </div> <br>";
             echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
          }
@@ -37,7 +45,7 @@
             echo "<div class='message'>
                       <p>Registration successfully!</p>
                   </div> <br>";
-            echo "<a href='login.php'><button class='btn'>Login Now</button>";
+            echo "<a href='index.php'><button class='btn'>Login Now</button>";
          
 
          }
@@ -47,7 +55,7 @@
         ?>
 
             <header>Sign Up</header>
-            <form action="" method="post">
+            <form id = "register-form" action="" method="post">
                 <div class="field input">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" autocomplete="off" required>
@@ -57,14 +65,13 @@
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" autocomplete="off" required>
                 </div>
-
-                <div class="field input">
-                    <label for="age">Age</label>
-                    <input type="number" name="age" id="age" autocomplete="off" required>
-                </div>
                 <div class="field input">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" autocomplete="off" required>
+                </div>
+                <div class="field input">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" name="confirmpassword" id="confirmpassword" autocomplete="off" required>
                 </div>
 
                 <div class="field">
@@ -75,8 +82,10 @@
                     Already a member? <a href="login.php">Sign In</a>
                 </div>
             </form>
+            
         </div>
         <?php } ?>
       </div>
+      
 </body>
 </html>

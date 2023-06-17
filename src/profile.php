@@ -6,6 +6,8 @@
     header("Location: login.php");
    }
 ?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -146,6 +148,52 @@
             }
             
             echo "<a href='edit.php?Id=$res_id'>Change Profile</a>";
+
+            // Update username if form is submitted
+          if(isset($_POST['update_username'])){
+            $newUsername = mysqli_real_escape_string($conn, $_POST['new_username']);
+            $id = $_SESSION['id'];
+            
+            $sql = "UPDATE entry_details SET username='$newUsername' WHERE id='$id'";
+            if(mysqli_query($conn, $sql)){
+              $_SESSION['username'] = $newUsername;
+              echo "<script>
+                        alert('Username updated successfully');
+                        window.location.href = 'profile.php';
+                    </script>";
+              exit;
+            } else {
+              echo "Error updating username: " . mysqli_error($conn);
+            }
+        }
+
+        if (isset($_POST['new_username'])) {
+          $newUsername = mysqli_real_escape_string($conn, $_POST['new_username']);
+          $id = $_SESSION['id'];
+        
+          // Check if the new username already exists in the database
+          $checkQuery = "SELECT * FROM entry_details WHERE username = '$newUsername' AND id != '$id'";
+          $checkResult = mysqli_query($conn, $checkQuery);
+          if (mysqli_num_rows($checkResult) > 0) {
+            echo "<script>
+                  alert('Username already exists. Please choose a different username.');
+                  window.location.href = 'profile.php';
+                </script>";
+            exit;
+          }
+        
+          $sql = "UPDATE entry_details SET username='$newUsername' WHERE id='$id'";
+          if (mysqli_query($conn, $sql)) {
+            $_SESSION['username'] = $newUsername;
+            echo "<script>
+                  alert('Username updated successfully');
+                  window.location.href = 'profile.php';
+                </script>";
+            exit;
+          } else {
+            echo "Error updating username: " . mysqli_error($conn);
+          }
+        }
             ?>
               </header>
               <div class="contents">
@@ -178,11 +226,45 @@
                   <div class="input-manage">
                     <a href="php/logout.php"><button class="submit3">Logout</button></a>
                   </div>
+                  <div class="input-field">
+              
+                    <button onclick="openEmailPopup()" type="button" class="submit4">Delete Account</button>
+
+
+                  </div>
                   
                   </div> 
                 </div>
               </div>
             </div>
+
+            <div class="overlaymail">
+              <div class="popup" id="email-popup">
+                <div class="popup-header">
+                  <h2>Delete Account</h2>
+                </div>
+                <form class="dialog">
+                  <label class=label for="ChangeEmail">Enter Password</label>
+                  <input type="text" class="input" id="ChangeEmail" required>
+                  <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
+                  <button type="submit" class="submit5">Save</button>
+                </form>
+              </div>
+            </div>
+            <div class="overlay-name">
+      <div class="popup" id="username-popup" >
+        <div class="popup-header">
+          <h2>Change Username</h2>
+        </div>
+        <form class="dialog" method="POST">
+  <label class="label" for="ChangeUsername">New Username</label>
+  <input type="text" class="input" id="ChangeUsername" name="new_username" required>
+  <button type="button" onclick="closeUsernamePopup()" class="submit5">Cancel</button>
+  <button type="submit" class="submit5">Save</button>
+</form>
+
+      </div>
+    </div>
         </div>
     </div>
 

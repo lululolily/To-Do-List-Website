@@ -130,6 +130,7 @@
           </nav>
 
           <body>
+            <form action="profile.php" method="POST">
             <img src="assets\background.png" class="bg-image">
             <div class="container mx-5">
               <header id="header">
@@ -211,7 +212,9 @@
                       <h4 style="display: inline-block;"><b>Username</b></h4>
                     </div>  
                     <div class="text">
+=======
                       <p style="display: inline-block;"><b><?php echo $res_Uname ?></b></p>
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
                     </div>  
                     <div class="input-field">
                       <button onclick="openUsernamePopup()"  type="button" class="submit2">Change Username</button>
@@ -220,7 +223,10 @@
                       <h4 style="display: inline-block;"><b>Email</b></h4>
                     </div>  
                     <div class="text">
+
+=======
                       <p style="display: inline-block;"><b><?php echo $res_Email ?></b></p>
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
                     </div>  
                   
                   <div class="input-manage">
@@ -267,6 +273,8 @@
     </div>
         </div>
     </div>
+=======
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
@@ -276,5 +284,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+=======
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
   </body>
 </html>

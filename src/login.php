@@ -4,11 +4,13 @@ $username="root";
 $password="";
 $database_name="database1";
 
-$conn = mysqli_connect($server_name, $username, $password, $database_name);
+/*$conn = mysqli_connect($server_name, $username, $password, $database_name);
 if(!$conn)
 {
     die("Connection Failed:" . mysqli_connect_error());
 }
+
+$errors = [];
 
 if(isset($_POST['login']))
 {
@@ -22,16 +24,20 @@ if(isset($_POST['login']))
         if ($stmt_result->num_rows > 0) {
             $data = $stmt_result->fetch_assoc();
             if ($data['password'] === $password) {
-                header("Location: index.php");
+                echo "<script>alert('Login successful!'); window.location='index.php';</script>";
                 exit();
             } else {
-                echo "<h2>Invalid Email or password</h2>";
+                $errors[] = "Wrong Email or password";
             }
         } else {
-            echo "<h2>Invalid Email or password</h2>";
+            $errors[] = "Wrong Email or password";
         }
     
     mysqli_close($conn);
 }
+// Display error messages as popups
+if (!empty($errors)) {
+    echo "<script>alert('" . implode("\\n", $errors) . "');window.location='login.html'</script>";
 
-?>
+}
+?>*/

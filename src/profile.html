@@ -120,6 +120,7 @@
           </nav>
 
           <body>
+            <form action="profile.php" method="POST">
             <img src="assets\background.png" class="bg-image">
             <div class="container mx-5">
               <header id="header">
@@ -140,7 +141,7 @@
                       <h4 style="display: inline-block;"><b>Username</b></h4>
                     </div>  
                     <div class="text">
-                      <p style="display: inline-block;"><b>Minni</b></p>
+                      <p style="display: inline-block;"><b>Aiman</b></p>
                     </div>  
                     <div class="input-field">
                       <button onclick="openUsernamePopup()"  type="button" class="submit2">Change Username</button>
@@ -149,7 +150,7 @@
                       <h4 style="display: inline-block;"><b>Email</b></h4>
                     </div>  
                     <div class="text">
-                      <p style="display: inline-block;"><b>minni365@gmail.com</b></p>
+                      <p style="display: inline-block;"><b>aiman@gmail.com</b></p>
                     </div>  
                   <div class="input-field">
                     <button onclick="openEmailPopup()"  type="button" class="submit2">Change email</button>
@@ -182,7 +183,7 @@
         <label class=label for="uploadPhoto">Upload Photo</label>
         <button type="submit" class="submit6">Select File</button>
         <button type="button" onclick="closePhotoPopup()" class="submit5">Cancel</button>
-        <button type="submit" class="submit5">Save</button>
+        <button type="submit" name="photo" class="submit5">Save</button>
       </form>
       </div>
     </div>
@@ -195,7 +196,7 @@
           <label class=label for="ChangeUsername">New Username</label>
           <input type="text" class="input" id="ChangeUsername" required>
           <button type="button" onclick="closeUsernamePopup()" class="submit5">Cancel</button>
-          <button type="submit" class="submit5">Save</button>
+          <button type="submit" name="newUsername" class="submit5">Save</button>
         </form>
       </div>
     </div>
@@ -208,7 +209,7 @@
           <label class=label for="ChangeEmail">New Email</label>
           <input type="text" class="input" id="ChangeEmail" required>
           <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
-          <button type="submit" class="submit5">Save</button>
+          <button type="submit" name="newEmail" class="submit5">Save</button>
         </form>
       </div>
     </div>
@@ -223,7 +224,7 @@
           <label class=label for="confirmPassword">Confirm Password</label>
           <input type="password" class="input" id="ResetPassword" required>
           <button type="button" onclick="closePasswordPopup()" class="submit5">Cancel</button>
-          <button type="submit" class="submit5">Save</button>
+          <button type="submit" name="" class="submit5">Save</button>
         </form>
       </div>
     </div>
@@ -300,5 +301,6 @@
         });
       });
     </script>
+    </form>
   </body>
 </html>

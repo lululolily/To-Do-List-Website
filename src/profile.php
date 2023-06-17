@@ -1,3 +1,11 @@
+<?php 
+   session_start();
+
+   include("php/config.php");
+   if(!isset($_SESSION['valid'])){
+    header("Location: login.php");
+   }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -43,7 +51,7 @@
                 </ul>
             </li>
             <li class="active">
-              <a href="profile.html">Settings</a>
+              <a href="profile.php">Settings</a>
             </li>
             <li>
               <a href="about.html">About Us</a>
@@ -111,8 +119,8 @@
                         </span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="profile.html">Manage Profile</a></li>
-                        <li><a class="dropdown-item" href="logout.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="profile.php">Manage Profile</a></li>
+                        <li><a class="dropdown-item" href="php/logout.php">Logout</a></li>
                       </ul>
                     </li>
                   </button>
@@ -125,6 +133,21 @@
             <div class="container mx-5">
               <header id="header">
                 <h1 style="display: inline-block;"><b> Manage Account</b></h1>
+                <?php 
+            
+            $id = $_SESSION['id'];
+            $sql = "SELECT * FROM `entry_details` WHERE `id` = '".$_SESSION['id']."'";
+            $query = mysqli_query($conn, $sql);
+
+            while($result = mysqli_fetch_assoc($query)){
+                $res_Uname = $result['username'];
+                $res_Email = $result['email'];
+                // $res_Age = $result['Age'];
+                $res_id = $result['id'];
+            }
+            
+            echo "<a href='edit.php?Id=$res_id'>Change Profile</a>";
+            ?>
               </header>
               <div class="contents">
                 <div class="row">
@@ -141,7 +164,9 @@
                       <h4 style="display: inline-block;"><b>Username</b></h4>
                     </div>  
                     <div class="text">
-                      <p style="display: inline-block;"><b>Aiman</b></p>
+=======
+                      <p style="display: inline-block;"><b><?php echo $res_Uname ?></b></p>
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
                     </div>  
                     <div class="input-field">
                       <button onclick="openUsernamePopup()"  type="button" class="submit2">Change Username</button>
@@ -150,124 +175,25 @@
                       <h4 style="display: inline-block;"><b>Email</b></h4>
                     </div>  
                     <div class="text">
-                      <p style="display: inline-block;"><b>aiman@gmail.com</b></p>
+
+=======
+                      <p style="display: inline-block;"><b><?php echo $res_Email ?></b></p>
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
                     </div>  
-                  <div class="input-field">
-                    <button onclick="openEmailPopup()"  type="button" class="submit2">Change email</button>
-                  </div>
-                  <h2 style="display: inline-block;"><b>Manage</b></h2>
-                    <div class="text">
-                      <h4 style="display: inline-block;"><b>Password</b></h4>
-                    </div>   
+                  
                   <div class="input-manage">
-                    <button onclick="openPasswordPopup()"  type="button" class="submit3">Reset Password</button>
+                    <a href="php/logout.php"><button class="submit3">Logout</button></a>
                   </div>
-                  <div class="input-manage">
-                    <a href="logout.html"><button class="submit3">Logout</button></a>
-                  </div>
-                  <div class="input-field">
-                    <a href="login.html"><button class="submit4">Delete Account</button></a>
-                  </div>
+                  
                   </div> 
                 </div>
               </div>
             </div>
         </div>
     </div>
-    <div class="overlay-pfp">
-      <div class="popup" id="photo-popup">
-        <div class="popup-header">
-         <h2>Change Photo</h2>
-        </div>
-      <form class="dialog">
-        <label class=label for="uploadPhoto">Upload Photo</label>
-        <button type="submit" class="submit6">Select File</button>
-        <button type="button" onclick="closePhotoPopup()" class="submit5">Cancel</button>
-        <button type="submit" name="photo" class="submit5">Save</button>
-      </form>
-      </div>
-    </div>
-    <div class="overlay-name">
-      <div class="popup" id="username-popup" >
-        <div class="popup-header">
-          <h2>Change Username</h2>
-        </div>
-        <form class="dialog">
-          <label class=label for="ChangeUsername">New Username</label>
-          <input type="text" class="input" id="ChangeUsername" required>
-          <button type="button" onclick="closeUsernamePopup()" class="submit5">Cancel</button>
-          <button type="submit" name="newUsername" class="submit5">Save</button>
-        </form>
-      </div>
-    </div>
-    <div class="overlaymail">
-      <div class="popup" id="email-popup">
-        <div class="popup-header">
-          <h2>Change Email</h2>
-        </div>
-        <form class="dialog">
-          <label class=label for="ChangeEmail">New Email</label>
-          <input type="text" class="input" id="ChangeEmail" required>
-          <button type="button" onclick="closeEmailPopup()" class="submit5">Cancel</button>
-          <button type="submit" name="newEmail" class="submit5">Save</button>
-        </form>
-      </div>
-    </div>
-    <div class="overlaypass">
-      <div class="popup" id="password-popup">
-        <div class="popup-header">
-          <h2>Reset Password</h2>
-        </div>
-        <form class="dialog">
-          <label class=label for="ResetPassword">New Password</label>
-          <input type="password" class="input" id="ResetPassword" required>
-          <label class=label for="confirmPassword">Confirm Password</label>
-          <input type="password" class="input" id="ResetPassword" required>
-          <button type="button" onclick="closePasswordPopup()" class="submit5">Cancel</button>
-          <button type="submit" name="" class="submit5">Save</button>
-        </form>
-      </div>
-    </div>
-    <div id="popup" class="popup-form">
-      <div class="reminder-form">
-        <div class="header">
-          <h2>Set Task</h2>
-        </div>
-        <div class="dialog-form">
-        <form id="form" onsubmit="saveReminder(event)">
-          <label for="task-name">Task Name:</label>
-          <input type="text" id="task-name" name="task-name" required>
-    
-          <label for="due-date">Set Due Date:</label>
-          <input type="datetime-local" class="date-time" id="date-time" name="date-time" required>
-    
-          <label for="category">Category:</label><br>
-          <select class="custom-select" id="category" name="category" required>
-            <option value="">--Select--</option>
-            <option value="Priority 1">Priority 1</option>
-            <option value="Priority 2">Priority 2</option>
-            <option value="Priority 3">Priority 3</option>
-            <option value="Deadline">Deadline</option>
-          </select><br>
-    
-          <label for="status">Status:</label><br>
-          <select class="custom-select" id="status" name="status"  required>
-            <option value="">--Select--</option>
-            <option value="To-Do">To-Do</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-          </select><br>
-    
-          <button type="button" onclick="closePopup()" class="button">Cancel</button>
-          <button type="submit" class="button">Save</button>
-        </form>
-        </div>
-      </div>
-    </div>
+=======
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
 
-
-
-    <!-- Link to jQuery and Bootstrap JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -276,31 +202,8 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('.custom-select').select2({
-          minimumResultsForSearch: Infinity,
-          templateResult: function(data) {
-            var $icon = $(data.element).data('icon');
-            var $text = $(data.element).text();
-            if (!$icon) {
-              return $text;
-            } else {
-              return $('<span><i class="' + $icon + '"></i> ' + $text + '</span>');
-            }
-          },
-          templateSelection: function(data) {
-            var $icon = $(data.element).data('icon');
-            var $text = $(data.element).text();
-            if (!$icon) {
-              return $text;
-            } else {
-              return $('<span><i class="' + $icon + '"></i> ' + $text + '</span>');
-            }
-          }
-        });
-      });
-    </script>
-    </form>
+
+=======
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a:src/profile.php
   </body>
 </html>

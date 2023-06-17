@@ -1,5 +1,13 @@
 <?php
-  $conn = mysqli_connect("localhost", "root", "", "database1");
+  include("php/config.php");
+  session_start();
+
+  // Check if the user is logged in (optional)
+  if (!isset($_SESSION['valid'])) {
+    // Redirect the user to the login page or handle the unauthorized access
+    header("Location: login.php");
+    exit; // Make sure to exit after redirection
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +54,7 @@
               </ul>
           </li>
           <li>
-            <a href="profile.html">Settings</a>
+            <a href="profile.php">Settings</a>
           </li>
           <li>
             <a href="about.html">About Us</a>
@@ -111,8 +119,8 @@
                       <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
                     </span>
                     <div class="dropdown-content-profile">
-                      <a href="profile.html">Manage Profile</a>
-                      <a href="logout.html">Logout</a>
+                      <a href="profile.php">Manage Profile</a>
+                      <a href="php/logout.php">Logout</a>
                     </div>
                   </button>
                 </div>   
@@ -149,10 +157,12 @@
                       echo '<span class="badge rounded-pill bg-success">' . $status . '</span>';
                     }
                     echo '</h3>';
-                    $sql = "SELECT * FROM `tasks` ORDER BY `datetime` ASC";
-                    $result = mysqli_query($conn, $sql);
+                    if (isset($_SESSION['id'])) {
+                      $user_id = $_SESSION['id'];
+                      $sql = "SELECT * FROM `tasks` WHERE `user_id` = '".$_SESSION['id']."' ORDER BY `datetime` ASC";
+                      $result = mysqli_query($conn, $sql);
     
-                    while ($row = mysqli_fetch_array($result)) {
+                      while ($row = mysqli_fetch_array($result)) {
                       $categoryClass = "";
                       $statusClass = "";
                       $dateComponent = DateTime::createFromFormat('Y-m-d H:i:s', $row['datetime'])->format('D, j M, g:i a');
@@ -189,7 +199,10 @@
                               </div>
                               </button>';
                       }
-                    }
+                    }} else {
+                      // Handle the case when the user ID is not available in the session
+                      echo "<h1>User ID not found in the session.</h1>";
+                  }
     
                     echo '<button data-bs-toggle="modal" data-bs-target="#modalPopup" type="button" class="tasks">
                           <i class="fa-regular fa-plus fa-xl" style="color: gray; display: inline-block;"></i>

@@ -1,66 +1,84 @@
-<?php
-$server_name="localhost";
-$username="root";
-$password="";
-$database_name="database1";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Register</title>
+</head>
+<body>
+      <div class="container">
+        <div class="box form-box">
 
-/*$conn = mysqli_connect($server_name, $username, $password, $database_name);
-if(!$conn)
-{
-    die("Connection Failed:" . mysqli_connect_error());
-}
 
-$errors = [];
+        <?php 
+         
+         include("php/config.php");
+         if(isset($_POST['submit'])){
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            //$age = $_POST['age'];
+            $password = $_POST['password'];
 
-if (isset($_POST['save'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmpassword = $_POST['confirmpassword'];
+         //verifying the unique email
 
-    // Escape user input to prevent SQL injection
-    $username = mysqli_real_escape_string($conn, $username);
-    $email = mysqli_real_escape_string($conn, $email);
-    $password = mysqli_real_escape_string($conn, $password);
-    $confirmpassword = mysqli_real_escape_string($conn, $confirmpassword);
+         $verify_query = mysqli_query($conn,"SELECT email FROM entry_details WHERE `email`");
 
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Email format invalid";
-    }
+         if(mysqli_num_rows($verify_query) !=0 ){
+            echo "<div class='message'>
+                      <p>This email is used, Try another One Please!</p>
+                  </div> <br>";
+            echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
+         }
+         else{
 
-    // Validate password length
-    if (strlen($password) < 8) {
-        $errors[] = "Password needs to be longer than 8 characters";
-    }
+            mysqli_query($conn,"INSERT INTO entry_details(username,email,password) VALUES('$username','$email','$password')") or die("Erroe Occured");
 
-    $select = "SELECT * FROM entry_details WHERE email = '$email'";
-    $result = mysqli_query($conn, $select);
+            echo "<div class='message'>
+                      <p>Registration successfully!</p>
+                  </div> <br>";
+            echo "<a href='login.php'><button class='btn'>Login Now</button>";
+         
 
-    if (mysqli_num_rows($result) > 0) {
-        $errors[] = "User already exists";
-    } else {
-        if ($password != $confirmpassword) {
-            $errors[] = "Password and Confirm Password do not match";
-        } else {
-            $sql_query = "INSERT INTO entry_details (username, email, password, confirmpassword)
-                          VALUES ('$username', '$email', '$password', '$confirmpassword')";
-            if (mysqli_query($conn, $sql_query)) {
-                mysqli_close($conn);
-                // Redirect to login.html or display success message
-                echo "<script>alert('Registration successful!'); window.location='login.html';</script>";
-                exit();
-            } else {
-                $errors[] = "Error: " . mysqli_error($conn);
-            }
-        }
-    }
-    mysqli_close($conn);
-}
+         }
 
-// Display error messages as popups
-if (!empty($errors)) {
-    echo "<script>alert('" . implode("\\n", $errors) . "');window.location='register.html'</script>";
+         }else{
+         
+        ?>
 
-}
-?>*/
+            <header>Sign Up</header>
+            <form action="" method="post">
+                <div class="field input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" autocomplete="off" required>
+                </div>
+
+                <div class="field input">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" autocomplete="off" required>
+                </div>
+
+                <div class="field input">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age" autocomplete="off" required>
+                </div>
+                <div class="field input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" autocomplete="off" required>
+                </div>
+
+                <div class="field">
+                    
+                    <input type="submit" class="btn" name="submit" value="Register" required>
+                </div>
+                <div class="links">
+                    Already a member? <a href="login.php">Sign In</a>
+                </div>
+            </form>
+        </div>
+        <?php } ?>
+      </div>
+</body>
+</html>
+>>>>>>> 30a51064f0b0de535b8e962065ef8c667d10a91a

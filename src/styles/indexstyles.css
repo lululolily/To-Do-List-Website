@@ -564,6 +564,8 @@ li.nav-item-dropdown {
   }
 
   .dropdown .dropdown-menu{
+    overflow-y: scroll;
+    max-height: 500px;
     width: 350px;
   }
 

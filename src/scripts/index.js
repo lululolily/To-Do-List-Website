@@ -4,6 +4,30 @@ $(document).ready(function () {
     });
 });
 
+function updateTaskData() {
+  $.ajax({
+    url: 'php/notification.php',
+    method: 'GET',
+    success: function(response) {
+      $('#taskContainer').html(response);
+    }
+  });
+}
+
+setInterval(updateTaskData, 100); 
+
+function updateTaskCount() {
+  $.ajax({
+    url: 'php/countnotify.php',
+    method: 'GET',
+    success: function(response) {
+      $('#taskCount').html(response);
+    }
+  });
+}
+
+setInterval(updateTaskCount, 1000); 
+
 var checkboxes = document.querySelectorAll('.form-check-input');
         
     checkboxes.forEach((checkbox) => {

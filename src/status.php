@@ -90,53 +90,46 @@
                   </span>
                 </button>
                 <div class="dropdown">
-                  <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="navbar-text">
-                      <i class="fas fa-bell fa-lg" style="color: orange;"></i>
-                    </span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notification">
-                    <div class="notification-header">
-                      <h5 class="text-center">Notification</h5>
-                    </div>
-                    <div class="notification-content">
-                      <div class="notification-list notification-list--priority">
-                        <p class="notify"><b>Tutorial Web Programming</b><br>
-                          <small>due Today 8 May, 10:00 pm</small>
-                        </p>
+                    <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="navbar-text">
+                        <i class="fas fa-bell fa-lg" id="taskCount" style="color: orange;"><?php include("php/countnotify.php")?></i>
+                      </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notification">
+                      <div class="notification-header">
+                        <h5 class="text-center">Notification</h5>
                       </div>
-                      <div class="notification-list notification-list--deadline">
-                        <p class="notify"><b>Tutorial ADA</b><br>
-                          <small>due Today 8 May, 11:59 pm</small>
-                        </p>
+                      <div class="notification-content" id="taskContainer">
+                      <?php
+                        include("php/notification.php")
+                      ?>
                       </div>
-                    </div>
-                  </ul>
-                </div>                  
-                <div class="dropdown-profile">
-                  <button type="button" class="btn">
-                    <span class="navbar-text">
-                      <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
-                    </span>
-                    <div class="dropdown-content-profile">
-                      <a href="profile.php">Manage Profile</a>
-                      <a href="#" onclick="confirmLogout()">Logout</a>
+                    </ul>
+                  </div>        
+                  <div class="dropdown-profile">
+                    <button type="button" class="btn">
+                      <span class="navbar-text">
+                        <i class="fas fa-user-circle fa-lg" style="color: orange;"></i>
+                      </span>
+                      <div class="dropdown-content-profile">
+                        <a href="profile.php">Manage Profile</a>
+                        <a href="#" onclick="confirmLogout()">Logout</a>
 
-                      <script>
-                        function confirmLogout() {
-                          var confirmLogout = confirm("Are you sure you want to log out?");
-                          if (confirmLogout) {
-                            window.location.href = "php/logout.php";
-                          } else {
-                            // User cancelled logout, do nothing or perform any other action
+                        <script>
+                          function confirmLogout() {
+                            var confirmLogout = confirm("Are you sure you want to log out?");
+                            if (confirmLogout) {
+                              window.location.href = "php/logout.php";
+                            } else {
+                              // User cancelled logout, do nothing or perform any other action
+                            }
                           }
-                        }
-                      </script>
-                    </div>
-                  </button>
-                </div>   
-            </div>
-        </nav>
+                        </script>
+                      </div>
+                    </button>
+                  </div>   
+              </div>
+          </nav>
 
           <body>
             <img src="assets\background.png" class="bg-image">

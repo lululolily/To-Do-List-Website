@@ -108,24 +108,17 @@
                   <div class="dropdown">
                     <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                       <span class="navbar-text">
-                        <i class="fas fa-bell fa-lg" style="color: orange;"></i>
+                        <i class="fas fa-bell fa-lg" id="taskCount" style="color: orange;"><?php include("php/countnotify.php")?></i>
                       </span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notification">
                       <div class="notification-header">
                         <h5 class="text-center">Notification</h5>
                       </div>
-                      <div class="notification-content">
-                        <div class="notification-list notification-list--priority">
-                          <p class="notify"><b>Tutorial Web Programming</b><br>
-                            <small>due Today 8 May, 10:00 pm</small>
-                          </p>
-                        </div>
-                        <div class="notification-list notification-list--deadline">
-                          <p class="notify"><b>Tutorial ADA</b><br>
-                            <small>due Today 8 May, 11:59 pm</small>
-                          </p>
-                        </div>
+                      <div class="notification-content" id="taskContainer">
+                      <?php
+                        include("php/notification.php")
+                      ?>
                       </div>
                     </ul>
                   </div>   

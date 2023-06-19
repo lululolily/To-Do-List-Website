@@ -681,19 +681,19 @@ li.nav-item-dropdown {
     align-items: center;
   }
   
-  .progress-circular-priority{
+  .progress-circular-priority {
     position: relative;
     width: 250px;
     height: 250px;
     border-radius: 50%;
     background: conic-gradient(#A6FFAF 0deg, #cfcdcd 0deg);
-    opacity: .8;
+    opacity: 0.8;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .progress-circular-priority::after{
+  .progress-circular-priority::after {
     position: absolute;
     content: '';
     width: 200px;
@@ -702,19 +702,19 @@ li.nav-item-dropdown {
     background: #fff;
   }
   
-  .progress-circular-deadline{
+  .progress-circular-deadline {
     position: relative;
     width: 240px;
     height: 240px;
     border-radius: 50%;
     background: conic-gradient(#A6FFAF 0deg, #cfcdcd 0deg);
-    opacity: .8;
+    opacity: 0.8;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .progress-circular-deadline::before{
+  .progress-circular-deadline::before {
     position: absolute;
     content: '';
     width: 210px;

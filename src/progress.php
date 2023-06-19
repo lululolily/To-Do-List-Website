@@ -1,3 +1,14 @@
+<?php
+  include("php/config.php");
+  session_start();
+
+  // Check if the user is logged in (optional)
+  if (!isset($_SESSION['valid'])) {
+    // Redirect the user to the login page or handle the unauthorized access
+    header("Location: login.php");
+    exit; // Make sure to exit after redirection
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -154,36 +165,50 @@
                         <canvas id="myChart"></canvas>
                       </div>
                     </div>
+
+                    <?php
+                    try {
+                        $sql = "SELECT * FROM tasks";
+                        $result = mysqli_query($conn, $sql);
+
+                        if ($result) {
+                            $completedByDay = array_fill(1, 7, 0); // Initialize an array to store completed tasks count for each day of the week
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $date = new DateTime($row["datetime"]);
+                                $dayOfWeek = $date->format('N'); // Get the day of the week (1-7)
+                                $status = $row["status"];
+
+                                if ($status === "Completed") {
+                                    $completedByDay[$dayOfWeek]++;
+                                }
+                            }
+                            mysqli_free_result($result);
+                        } else {
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                    } catch (PDOException $e) {
+                        die("Error");
+                    }
+
+                    ?>
+
                     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
                     <script>
-                    // setup 
-                    const data = {
-                      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                      datasets: [{
-                        label: 'Finished tasks',
-                        data: [1, 0, 3, 2, 1, 0, 2],
-                        backgroundColor: [
-                          'rgba(0, 0, 0, 0.2)',
-                          'rgba(0, 0, 0, 0.2)',
-                          'rgba(0, 0, 0, 0.2)',
-                          'rgba(0, 0, 0, 0.2)',
-                          'rgba(0, 0, 0, 0.2)',
-                          'rgba(0, 0, 0, 0.2)',
-                          'rgba(0, 0, 0, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgba(0, 0, 0, 1)',
-                          'rgba(0, 0, 0, 1)',
-                          'rgba(0, 0, 0, 1)',
-                          'rgba(0, 0, 0, 1)',
-                          'rgba(0, 0, 0, 1)',
-                          'rgba(0, 0, 0, 1)',
-                          'rgba(0, 0, 0, 1)'
-                        ],
-                        borderWidth: 1
+                        const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-                      }]
-                    };
+                        // setup 
+                        const data = {
+                            labels: daysOfWeek,
+                            datasets: [{
+                                label: 'Finished tasks',
+                                data: <?php echo json_encode(array_values($completedByDay)); ?>,
+                                backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                                borderColor: 'rgba(0, 0, 0, 1)',
+                                borderWidth: 1
+                            }]
+                        };
+
                 
                     // config 
                     const config = {
@@ -231,27 +256,92 @@
                     </script>
 
                 </div>
-                
-                  
+                <?php
+                  try {
+                      // Assuming you have the database connection established
 
-                  <div class = "containers">
+                      // Count completed priority tasks
+                      $sqlPriority = "SELECT COUNT(*) FROM tasks WHERE status = 'Completed' AND category LIKE 'priority%'";
+                      $resultPriority = mysqli_query($conn, $sqlPriority);
+                      $completedPriorityCount = mysqli_fetch_row($resultPriority)[0];
 
-                  <div class = "row">
+                      // Count completed deadline tasks
+                      $sqlDeadline = "SELECT COUNT(*) FROM tasks WHERE status = 'Completed' AND category = 'deadline'";
+                      $resultDeadline = mysqli_query($conn, $sqlDeadline);
+                      $completedDeadlineCount = mysqli_fetch_row($resultDeadline)[0];
 
-                    <div class = "col-md-6">
-                    <div class="progress-circular-priority">
-                    <span class = "value">0/0</span>
-                    </div>
-                  <div class = "text">Tasks completed on time</div>
+                      // Count total priority tasks
+                      $sqlTotalPriority = "SELECT COUNT(*) FROM tasks WHERE category LIKE 'priority%'";
+                      $resultTotalPriority = mysqli_query($conn, $sqlTotalPriority);
+                      $totalPriorityCount = mysqli_fetch_row($resultTotalPriority)[0];
+
+                      // Count total deadline tasks
+                      $sqlTotalDeadline = "SELECT COUNT(*) FROM tasks WHERE category = 'deadline'";
+                      $resultTotalDeadline = mysqli_query($conn, $sqlTotalDeadline);
+                      $totalDeadlineCount = mysqli_fetch_row($resultTotalDeadline)[0];
+
+                      $completionPercentagePriority = 0;
+                      $completionPercentageDeadline = 0;
+
+                      if ($totalPriorityCount > 0) {
+                          $completionPercentagePriority = ($completedPriorityCount / $totalPriorityCount) * 100;
+                      }
+
+                      if ($totalDeadlineCount > 0) {
+                          $completionPercentageDeadline = ($completedDeadlineCount / $totalDeadlineCount) * 100;
+                      }
+                  } catch (Exception $e) {
+                      // Handle the exception (e.g., display an error message or log the error)
+                      echo "An error occurred: " . $e->getMessage();
+                  }
+                  ?>
+
+
+                  <script>
+                    // Get completion percentages from PHP variables
+                    var completionPercentagePriority = <?php echo $completionPercentagePriority; ?>;
+                    var completionPercentageDeadline = <?php echo $completionPercentageDeadline; ?>;
+
+                    // Circular progress animation for priority
+                    let circularProgress = document.querySelector(".progress-circular-priority");
+                    let progressStartValue = 0;
+                    let progressEndValue = completionPercentagePriority;
+                    let speed = 100;
+
+                    let progress = setInterval(() => {
+                      progressStartValue++;
+                      circularProgress.style.background = `conic-gradient(#A6FFAF ${progressStartValue * 3.6}deg, #cfcdcd 0deg)`;
+
+                      if (progressStartValue >= progressEndValue) {
+                        clearInterval(progress);
+                      }
+                    }, speed);
+                  </script>
+
+
+             
+                  <div class="containers">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="progress-circular-priority">
+                                  <span class="value"><?php echo $completedPriorityCount . '/' . $totalPriorityCount; ?></span>
+                              </div>
+                              <div class="text">Completed Priority Tasks</div>
+                          </div>
+
+                          <div class="col-md-6">
+                              <div class="progress-circular-deadline">
+                                  <span class="value"><?php echo $completedDeadlineCount . '/' . $totalDeadlineCount; ?></span>
+                              </div>
+                              <div class="text">Completed Deadline Tasks</div>
+                          </div>
+                      </div>
                   </div>
 
-                  <div class = "col-md-6">
-                    <div class="progress-circular-priority">
-                    <span class = "value">0/0</span>
-                    </div>
-                  <div class = "text">Tasks completed after deadline</div>
                   </div>
-                </div>
+
+
+              
 
               </div>
               <!--page content-->

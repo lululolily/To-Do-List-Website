@@ -23,7 +23,7 @@
       
               <label for="due-date">Set Due Date:</label>
               <input type="datetime-local" class="date-time" id="date-time" value="<?php echo $row['datetime']; ?>"
-              name="date-time" min="<?php echo date('Y-m-d\TH:i'); ?>"  required>
+              name="date-time" min="<?php echo date('Y-m-d'); ?>"  required>
       
               <label for="category">Category:</label><br>
               <select class="form-select" id="category" name="category" required>

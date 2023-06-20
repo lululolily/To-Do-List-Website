@@ -218,6 +218,13 @@
                   exit;
               }
           }
+
+          if ($newPassword === $currentPassword) {
+            echo "<script>alert('New password same as old password.');
+            window.location.href = 'profile.php';
+            </script>";
+            exit;
+        }
       
           // Password Length Validation
           if (strlen($newPassword) < 8) {

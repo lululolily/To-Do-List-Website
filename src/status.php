@@ -49,7 +49,7 @@
                   <a class="dropdown-item" href="category.php">Category</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="progress.html">Progress</a>
+                  <a class="dropdown-item" href="progress.php">Progress</a>
                 </li>
               </ul>
           </li>
@@ -142,7 +142,7 @@
                   <a href="summary.php"><button><i class="fa-regular fa-clipboard fa-xl"></i>Tasks Summary</button></a>
                   <a href="status.php"><button class="active"><i class="fa-regular fa-clipboard fa-xl"></i>By Status</button></a>
                   <a href="category.php"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Category</button></a>
-                  <a href="progress.html"><button><i class="fa-regular fa-bar-chart fa-xl"></i>View Progress</button></a>
+                  <a href="progress.php"><button><i class="fa-regular fa-bar-chart fa-xl"></i>View Progress</button></a>
               </div>
               <div class="week-container">
                 <?php

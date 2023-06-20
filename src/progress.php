@@ -48,7 +48,7 @@
                     <a class="dropdown-item" href="category.php">Category</a>
                   </li>
                   <li class="active">
-                    <a class="dropdown-item" href="progress.html">Progress</a>
+                    <a class="dropdown-item" href="progress.php">Progress</a>
                   </li>
                 </ul>
             </li>
@@ -98,17 +98,10 @@
                       <div class="notification-header">
                         <h5 class="text-center">Notification</h5>
                       </div>
-                      <div class="notification-content">
-                        <div class="notification-list notification-list--priority">
-                          <p class="notify"><b>Tutorial Web Programming</b><br>
-                            <small>due Today 8 May, 10:00 pm</small>
-                          </p>
-                        </div>
-                        <div class="notification-list notification-list--deadline">
-                          <p class="notify"><b>Tutorial ADA</b><br>
-                            <small>due Today 8 May, 11:59 pm</small>
-                          </p>
-                        </div>
+                      <div class="notification-content" id="taskContainer">
+                        <?php
+                          include("php/notification.php")
+                        ?>
                       </div>
                     </ul>
                   </div> 
@@ -151,7 +144,7 @@
                     <a href="summary.php"><button><i class="fa-regular fa-clipboard fa-xl"></i>Tasks Summary</button></a>
                     <a href="status.php"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Status</button></a>
                     <a href="category.php"><button><i class="fa-regular fa-clipboard fa-xl"></i>By Category</button></a>
-                    <a href="progress.html"><button class="active"><i class="fa-regular fa-bar-chart fa-xl"></i>View Progress</button></a>
+                    <a href="progress.php"><button class="active"><i class="fa-regular fa-bar-chart fa-xl"></i>View Progress</button></a>
                   </div>
 
               <!--page content-->
@@ -256,6 +249,7 @@
                     </script>
 
                 </div>
+
                 <?php
                   try {
                       // Assuming you have the database connection established
@@ -296,31 +290,7 @@
                   }
                   ?>
 
-
-                  <script>
-                    // Get completion percentages from PHP variables
-                    var completionPercentagePriority = <?php echo $completionPercentagePriority; ?>;
-                    var completionPercentageDeadline = <?php echo $completionPercentageDeadline; ?>;
-
-                    // Circular progress animation for priority
-                    let circularProgress = document.querySelector(".progress-circular-priority");
-                    let progressStartValue = 0;
-                    let progressEndValue = completionPercentagePriority;
-                    let speed = 100;
-
-                    let progress = setInterval(() => {
-                      progressStartValue++;
-                      circularProgress.style.background = `conic-gradient(#A6FFAF ${progressStartValue * 3.6}deg, #cfcdcd 0deg)`;
-
-                      if (progressStartValue >= progressEndValue) {
-                        clearInterval(progress);
-                      }
-                    }, speed);
-                  </script>
-
-
-             
-                  <div class="containers">
+                <div class="containers">
                       <div class="row">
                           <div class="col-md-6">
                               <div class="progress-circular-priority">
@@ -339,6 +309,46 @@
                   </div>
 
                   </div>
+
+                  <script>
+
+                    // Get completion percentages from PHP variables
+                    var completionPercentagePriority = <?php echo $completionPercentagePriority; ?>;
+                    var completionPercentageDeadline = <?php echo $completionPercentageDeadline; ?>;
+
+                    console.log('Completion Percentage (Priority):', completionPercentagePriority);
+                    console.log('Completion Percentage (Deadline):', completionPercentageDeadline);
+
+
+                    // Circular progress animation for priority
+                    let circularProgressPriority = document.querySelector(".progress-circular-priority");
+                    let circularProgressDeadline = document.querySelector(".progress-circular-deadline");
+
+                    let priorityStartValue = 0;
+                    let priorityEndValue = completionPercentagePriority;
+                    let deadlineStartValue = 0;
+                    let deadlineEndValue = completionPercentageDeadline;
+                    let speed = 10;
+
+                    let priorityProgress = setInterval(() => {
+                      priorityStartValue++;
+                      circularProgressPriority.style.background = `conic-gradient(#A6FFAF ${priorityStartValue * 3.6}deg, #cfcdcd 0deg)`;
+
+                      if (priorityStartValue >= priorityEndValue) {
+                        clearInterval(priorityProgress);
+                      }
+                    }, speed);
+
+                    let deadlineProgress = setInterval(() => {
+                      deadlineStartValue++;
+                      circularProgressDeadline.style.background = `conic-gradient(#A6FFAF ${deadlineStartValue * 3.6}deg, #cfcdcd 0deg)`;
+
+                      if (deadlineStartValue >= deadlineEndValue) {
+                        clearInterval(deadlineProgress);
+                      }
+                    }, speed);
+
+                  </script>
 
 
               

@@ -47,7 +47,7 @@
                     <a class="dropdown-item" href="category.php">Category</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="progress.html">Progress</a>
+                    <a class="dropdown-item" href="progress.php">Progress</a>
                   </li>
                 </ul>
             </li>

@@ -204,8 +204,7 @@
                               $categoryClass = "badge bg-warning";
                           }
                   
-                          $currentDate = date('Y-m-d H:i:s');
-                          if ($dayComponent === $day && $row['datetime'] >= $currentDate) {
+                          if ($dayComponent === $day) {
                               $task['id'] = $row['id'];
                               $task['taskname'] = $row['taskname'];
                               $task['status'] = $row['status'];

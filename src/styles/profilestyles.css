@@ -17,16 +17,16 @@ body {
     height: 100%;
     object-fit: cover;
   }
-
-.profile-image {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    width: 150px;
-    height: 150px;
-}
-
+  
+     .profile-image {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+      width: 150px;
+      height: 150px;
+  }
+  
 p {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.1em;

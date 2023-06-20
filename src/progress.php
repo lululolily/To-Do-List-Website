@@ -160,8 +160,10 @@
                     </div>
 
                     <?php
-                    try {
-                        $sql = "SELECT * FROM tasks";
+                    
+                    if (isset($_SESSION['id'])) {
+                        $user_id = $_SESSION['id'];
+                        $sql = "SELECT * FROM `tasks` WHERE `user_id` = '".$_SESSION['id']."' ORDER BY `datetime` ASC";
                         $result = mysqli_query($conn, $sql);
 
                         if ($result) {
@@ -180,9 +182,11 @@
                         } else {
                             echo "Error: " . mysqli_error($conn);
                         }
-                    } catch (PDOException $e) {
-                        die("Error");
-                    }
+                    } 
+                    else {
+                      // Handle the case when the user ID is not available in the session
+                      echo "<h1>User ID not found in the session.</h1>";
+                  }
 
                     ?>
 
@@ -251,44 +255,49 @@
                 </div>
 
                 <?php
-                  try {
-                      // Assuming you have the database connection established
+                try {
+                  // Fetch user tasks
+                  if (isset($_SESSION['id'])) {
+                    $user_id = $_SESSION['id'];
+                    $sql = "SELECT * FROM `tasks` WHERE `user_id` = '" . $_SESSION['id'] . "' ORDER BY `datetime` ASC";
+                    $result = mysqli_query($conn, $sql);
+                    
+                    // Count completed priority tasks
+                    $sqlPriority = "SELECT COUNT(*) FROM tasks WHERE status = 'Completed' AND category LIKE 'priority%' AND user_id = '" . $_SESSION['id'] . "'";
+                    $resultPriority = mysqli_query($conn, $sqlPriority);
+                    $completedPriorityCount = mysqli_fetch_row($resultPriority)[0];
 
-                      // Count completed priority tasks
-                      $sqlPriority = "SELECT COUNT(*) FROM tasks WHERE status = 'Completed' AND category LIKE 'priority%'";
-                      $resultPriority = mysqli_query($conn, $sqlPriority);
-                      $completedPriorityCount = mysqli_fetch_row($resultPriority)[0];
+                    // Count completed deadline tasks
+                    $sqlDeadline = "SELECT COUNT(*) FROM tasks WHERE status = 'Completed' AND category = 'deadline' AND user_id = '" . $_SESSION['id'] . "'";
+                    $resultDeadline = mysqli_query($conn, $sqlDeadline);
+                    $completedDeadlineCount = mysqli_fetch_row($resultDeadline)[0];
 
-                      // Count completed deadline tasks
-                      $sqlDeadline = "SELECT COUNT(*) FROM tasks WHERE status = 'Completed' AND category = 'deadline'";
-                      $resultDeadline = mysqli_query($conn, $sqlDeadline);
-                      $completedDeadlineCount = mysqli_fetch_row($resultDeadline)[0];
+                    // Count total priority tasks
+                    $sqlTotalPriority = "SELECT COUNT(*) FROM tasks WHERE category LIKE 'priority%' AND user_id = '" . $_SESSION['id'] . "'";
+                    $resultTotalPriority = mysqli_query($conn, $sqlTotalPriority);
+                    $totalPriorityCount = mysqli_fetch_row($resultTotalPriority)[0];
 
-                      // Count total priority tasks
-                      $sqlTotalPriority = "SELECT COUNT(*) FROM tasks WHERE category LIKE 'priority%'";
-                      $resultTotalPriority = mysqli_query($conn, $sqlTotalPriority);
-                      $totalPriorityCount = mysqli_fetch_row($resultTotalPriority)[0];
+                    // Count total deadline tasks
+                    $sqlTotalDeadline = "SELECT COUNT(*) FROM tasks WHERE category = 'deadline' AND user_id = '" . $_SESSION['id'] . "'";
+                    $resultTotalDeadline = mysqli_query($conn, $sqlTotalDeadline);
+                    $totalDeadlineCount = mysqli_fetch_row($resultTotalDeadline)[0];
 
-                      // Count total deadline tasks
-                      $sqlTotalDeadline = "SELECT COUNT(*) FROM tasks WHERE category = 'deadline'";
-                      $resultTotalDeadline = mysqli_query($conn, $sqlTotalDeadline);
-                      $totalDeadlineCount = mysqli_fetch_row($resultTotalDeadline)[0];
+                    $completionPercentagePriority = 0;
+                    $completionPercentageDeadline = 0;
 
-                      $completionPercentagePriority = 0;
-                      $completionPercentageDeadline = 0;
+                    if ($totalPriorityCount > 0) {
+                      $completionPercentagePriority = ($completedPriorityCount / $totalPriorityCount) * 100;
+                    }
 
-                      if ($totalPriorityCount > 0) {
-                          $completionPercentagePriority = ($completedPriorityCount / $totalPriorityCount) * 100;
-                      }
-
-                      if ($totalDeadlineCount > 0) {
-                          $completionPercentageDeadline = ($completedDeadlineCount / $totalDeadlineCount) * 100;
-                      }
-                  } catch (Exception $e) {
-                      // Handle the exception (e.g., display an error message or log the error)
-                      echo "An error occurred: " . $e->getMessage();
+                    if ($totalDeadlineCount > 0) {
+                      $completionPercentageDeadline = ($completedDeadlineCount / $totalDeadlineCount) * 100;
+                    }
                   }
-                  ?>
+                } catch (Exception $e) {
+                  // Handle the exception (e.g., display an error message or log the error)
+                  echo "An error occurred: " . $e->getMessage();
+                }
+                ?>
 
                 <div class="containers">
                       <div class="row">

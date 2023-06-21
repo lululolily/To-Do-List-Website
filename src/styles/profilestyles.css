@@ -17,6 +17,17 @@ body {
     height: 100%;
     object-fit: cover;
   }
+  
+  .profile-icon {
+    background-image: url('uploads/<?php echo $res_filename; ?>');
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
 
 .profile-image {
     display: block;
@@ -25,6 +36,7 @@ body {
     margin-top: 10px;
     width: 150px;
     height: 150px;
+    border-radius: 50%
 }
 
 p {
@@ -247,6 +259,23 @@ a[aria-expanded="true"] {
     margin-bottom: 10px;
   }
 
+  .submit{
+    background: #CCB3A3;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    float: right;
+    margin-bottom: 10px;
+  }
+  
+  .submit:hover{
+    background: #0094FF;
+    text-align: center;
+    color: #fff;
+  }
+
   .submit1 {
     display: block;
     margin: 0 auto;
@@ -361,6 +390,15 @@ a[aria-expanded="true"] {
     background: #0094FF;
     text-align: center;
     color: #fff;
+}
+
+.filebox {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #000;
 }
 
 .modal-dialog {

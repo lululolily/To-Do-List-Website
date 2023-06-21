@@ -149,7 +149,24 @@
                 $res_Uname = $result['username'];
                 $res_Email = $result['email'];
                 $res_id = $result['id'];
+                $res_photo = $result['profile_photo'];
             }
+            if(isset($_POST['upload_photo'])){
+              $newPhoto = mysqli_real_escape_string($conn, $_POST['new_photo']);
+              $id = $_SESSION['id'];
+
+              $sql = "UPDATE entry_details SET profile_photo='$newPhoto' WHERE id='$id'";
+              if(mysqli_query($conn, $sql)){
+                $_SESSION['profile_photo'] = $newPhoto;
+                echo "<script>
+                          alert('Photo uploaded successfully');
+                          window.location.href = 'profile.php';
+                      </script>";
+                exit;
+              } else {
+                echo "Error uploading photo: " . mysqli_error($conn);
+              }
+          }
 
             // Update username if form is submitted
           if(isset($_POST['update_username'])){
@@ -218,6 +235,13 @@
                   exit;
               }
           }
+
+          if ($newPassword === $currentPassword) {
+            echo "<script>alert('New password same as old password.');
+            window.location.href = 'profile.php';
+            </script>";
+            exit;
+        }
       
           // Password Length Validation
           if (strlen($newPassword) < 8) {
@@ -266,6 +290,8 @@
             }
         }
 
+        
+
         $userId = $_SESSION['id'];
 
         // Delete associated tasks
@@ -297,7 +323,14 @@
               <div class="contents">
                 <div class="row">
                   <div class="column left">
-                    <img src="assets\profile.png" class="profile-image">
+                  <?php
+                        // Assuming $res_filename contains the filename of the uploaded photo
+                        if (isset($res_photo)) {
+                          echo '<img src="uploads/' . $res_photo . '" class="profile-image" alt="">';
+                        } else {
+                          echo '<img src="assets/profile.png" class="profile-image" alt="">';
+                        }
+                        ?>
                     <div class="input-field">
                       <button onclick="openPhotoPopup()"  type="button"class="submit1">Upload Photo</button>
                   </div>
@@ -347,7 +380,20 @@
                 </div>
               </div>
             </div>
-
+            <div class="overlay-pfp">
+              <div class="popup" id="photo-popup">
+                <div class="popup-header">
+                  <h2>Upload Profile Picture</h2>
+                </div>
+                <form action="upload.php" method="POST" enctype="multipart/form-data">
+                  <label class="label" for="Password">New Profile Picture</label>
+                  <input type="file" id="photo" class="filebox" name="photo" required>
+                  <button type="button" onclick="closePhotoPopup()" class="submit5">Cancel</button>
+                  <input type="hidden" name="uploaded_photo" id="uploaded_photo">
+                  <button type="submit" name="upload_photo" class="submit">Upload</button>
+                </form>
+              </div>
+            </div>
             <div class="overlaymail">
               <div class="popup" id="email-popup">
                 <div class="popup-header">
@@ -395,7 +441,16 @@
         <?php
           include("php/addTask.php");
         ?>
+        <script>
+          // JavaScript code to update the hidden input field with the selected photo file name
+          const photoInput = document.getElementById('photo');
+          const uploadedPhotoInput = document.getElementById('uploaded_photo');
 
+          photoInput.addEventListener('change', (event) => {
+            const selectedFile = event.target.files[0];
+            uploadedPhotoInput.value = selectedFile.name;
+          });
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript" src="scripts/profile.js"></script>

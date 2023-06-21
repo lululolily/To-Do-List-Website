@@ -1,4 +1,12 @@
-<!--push-->
+<?php 
+      session_start();
+
+      if (isset($_SESSION['valid'])) {
+       // User is already logged in, redirect to index.php
+       header("Location: index.php");
+       exit;
+   }
+?>
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +35,7 @@
                             <p>Thank you</p>
                         </div>
                         <div class="input-field">
-                            <a href="login.html"><input type="submit" class="submit" value="Back to Log In"></a>
+                            <a href="login.php"><input type="submit" class="submit" value="Back to Log In"></a>
                         </div>
 
                      </div>

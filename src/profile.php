@@ -390,7 +390,7 @@
                   <input type="file" id="photo" class="filebox" name="photo" required>
                   <button type="button" onclick="closePhotoPopup()" class="submit5">Cancel</button>
                   <input type="hidden" name="uploaded_photo" id="uploaded_photo">
-                  <button type="submit" name="upload_photo" class="submit">Upload</button>
+                  <button type="submit" name="upload_photo" class="submit5">Upload</button>
                 </form>
               </div>
             </div>

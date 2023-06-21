@@ -17,17 +17,6 @@ body {
     height: 100%;
     object-fit: cover;
   }
-  
-  .profile-icon {
-    background-image: url('uploads/<?php echo $res_filename; ?>');
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-  }
 
 .profile-image {
     display: block;
@@ -36,7 +25,6 @@ body {
     margin-top: 10px;
     width: 150px;
     height: 150px;
-    border-radius: 50%
 }
 
 p {

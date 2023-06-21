@@ -45,8 +45,8 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors)) {
-        $sql_query = "INSERT INTO entry_details (username, email, password, confirmpassword)
-                      VALUES ('$username', '$email', '$password', '$confirmpassword')";
+        $sql_query = "INSERT INTO entry_details (username, email, password)
+                      VALUES ('$username', '$email', '$password')";
         if (mysqli_query($conn, $sql_query)) {
             mysqli_close($conn);
             // Redirect to login.html or display success message

@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
         $errors[] = "Password needs to be longer than 8 characters";
     }
 
-    $select = "SELECT * FROM entry_details WHERE email = '$email'";
+    $select = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $select);
 
     if (mysqli_num_rows($result) > 0) {
@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors)) {
-        $sql_query = "INSERT INTO entry_details (username, email, password)
+        $sql_query = "INSERT INTO users (username, email, password)
                       VALUES ('$username', '$email', '$password')";
         if (mysqli_query($conn, $sql_query)) {
             mysqli_close($conn);

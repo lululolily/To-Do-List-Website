@@ -142,7 +142,7 @@
                 <?php 
             
             $id = $_SESSION['id'];
-            $sql = "SELECT * FROM `entry_details` WHERE `id` = '".$_SESSION['id']."'";
+            $sql = "SELECT * FROM `users` WHERE `id` = '".$_SESSION['id']."'";
             $query = mysqli_query($conn, $sql);
 
             while($result = mysqli_fetch_assoc($query)){
@@ -155,7 +155,7 @@
               $newPhoto = mysqli_real_escape_string($conn, $_POST['new_photo']);
               $id = $_SESSION['id'];
 
-              $sql = "UPDATE entry_details SET profile_photo='$newPhoto' WHERE id='$id'";
+              $sql = "UPDATE users SET profile_photo='$newPhoto' WHERE id='$id'";
               if(mysqli_query($conn, $sql)){
                 $_SESSION['profile_photo'] = $newPhoto;
                 echo "<script>
@@ -173,7 +173,7 @@
             $newUsername = mysqli_real_escape_string($conn, $_POST['new_username']);
             $id = $_SESSION['id'];
             
-            $sql = "UPDATE entry_details SET username='$newUsername' WHERE id='$id'";
+            $sql = "UPDATE users SET username='$newUsername' WHERE id='$id'";
             if(mysqli_query($conn, $sql)){
               $_SESSION['username'] = $newUsername;
               echo "<script>
@@ -191,7 +191,7 @@
           $id = $_SESSION['id'];
         
           // Check if the new username already exists in the database
-          $checkQuery = "SELECT * FROM entry_details WHERE username = '$newUsername' AND id != '$id'";
+          $checkQuery = "SELECT * FROM users WHERE username = '$newUsername' AND id != '$id'";
           $checkResult = mysqli_query($conn, $checkQuery);
           if (mysqli_num_rows($checkResult) > 0) {
             echo "<script>
@@ -201,7 +201,7 @@
             exit;
           }
         
-          $sql = "UPDATE entry_details SET username='$newUsername' WHERE id='$id'";
+          $sql = "UPDATE users SET username='$newUsername' WHERE id='$id'";
           if (mysqli_query($conn, $sql)) {
             $_SESSION['username'] = $newUsername;
             echo "<script>
@@ -222,7 +222,7 @@
           $id = $_SESSION['id'];
       
           // Retrieve current password from the database
-          $retrievePasswordQuery = "SELECT password FROM entry_details WHERE id='$id'";
+          $retrievePasswordQuery = "SELECT password FROM users WHERE id='$id'";
           $result = mysqli_query($conn, $retrievePasswordQuery);
           if ($row = mysqli_fetch_assoc($result)) {
               $currentPasswordFromDB = $row['password'];
@@ -260,7 +260,7 @@
           }
       
           // Update the password in the database
-          $updatePasswordQuery = "UPDATE entry_details SET password='$newPassword' WHERE id='$id'";
+          $updatePasswordQuery = "UPDATE users SET password='$newPassword' WHERE id='$id'";
           if (mysqli_query($conn, $updatePasswordQuery)) {
               $_SESSION['password'] = $newPassword;
               echo "<script>
@@ -277,7 +277,7 @@
         $Password = mysqli_real_escape_string($conn, $_POST['password']);
         $id = $_SESSION['id'];
 
-        $retrievePasswordQuery = "SELECT password FROM entry_details WHERE id='$id'";
+        $retrievePasswordQuery = "SELECT password FROM users WHERE id='$id'";
         $result = mysqli_query($conn, $retrievePasswordQuery);
         if ($row = mysqli_fetch_assoc($result)) {
             $currentPasswordFromDB = $row['password'];
@@ -301,8 +301,8 @@
             exit;
         }
         
-        // Delete entry_details
-        $deleteQuery = "DELETE FROM entry_details WHERE `id` = '$userId'";
+        // Delete users
+        $deleteQuery = "DELETE FROM users WHERE `id` = '$userId'";
         if (mysqli_query($conn, $deleteQuery)) {
             $_SESSION['password'] = $Password;
             session_unset();

@@ -29,7 +29,7 @@
                $email = mysqli_real_escape_string($conn,$_POST['email']);
                $password = mysqli_real_escape_string($conn,$_POST['password']);
 
-               $result = mysqli_query($conn,"SELECT * FROM entry_details WHERE email='$email' AND password='$password' ") or die("Select Error");
+               $result = mysqli_query($conn,"SELECT * FROM users WHERE email='$email' AND password='$password' ") or die("Select Error");
                $row = mysqli_fetch_assoc($result);
 
                if(is_array($row) && !empty($row)){

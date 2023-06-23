@@ -28,7 +28,7 @@ $connection = mysqli_connect($server_name, $username, $password, $database_name)
 $id = 123; // Replace with the actual user ID
 
 // Store the uploaded photo details in the database
-$query = "UPDATE entry_details SET profile_photo = '$uploadedPhotoName' WHERE `id` = '".$_SESSION['id']."'";
+$query = "UPDATE users SET profile_photo = '$uploadedPhotoName' WHERE `id` = '".$_SESSION['id']."'";
 
 mysqli_query($connection, $query);
 

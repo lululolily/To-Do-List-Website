@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minni To-Do List</title>
     <link rel="shortcut icon" type="image/png" href="assets/icon.png">
-    <link rel="stylesheet" href="logoutstyles.css">
+    <link rel="stylesheet" href="styles/logoutstyles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     
 </head>
@@ -23,7 +23,8 @@
     <div class="wrapper">
         <div class="container main">
             <div class="row">
-                <div class="col-md-6 side-image">
+                <div class="col-md-6">
+                    <img src="assets\bglogout1.png" class="side-image">
                     <div class="text">
                         <p>You are the one who should be the pilot of your time<i></i></p>
                     </div>
